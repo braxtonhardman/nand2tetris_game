@@ -1,0 +1,95 @@
+// Player will always stay stationary in the middle of the screen 
+class Player { 
+
+    // Keeps track of X position 
+    field int playerX; 
+    // Keeps track of Y position 
+    field int playerY; 
+
+    // Initalize player variables 
+    constructor Player new(int x, int y) {
+        let playerX = x; 
+        let playerY = y; 
+
+        return this;
+    }
+    
+
+    // Initalize player drawings based on key being held 
+    method void initBitMap() { 
+        return; 
+    }
+
+
+    // 6x6 pixel player 
+    method void draw(int location) { 
+        var int memAddress; 
+        // Exact bit positions  
+        let memAddress = 16384 + location; 
+        // Draw 1 pixel to the screen for the player
+
+        // Direction Left 
+        // column 0
+        do Memory.poke(memAddress, 4064);
+        do Memory.poke(memAddress +32, 16368);
+        do Memory.poke(memAddress +64, 32764);
+        do Memory.poke(memAddress +96, 32764);
+        do Memory.poke(memAddress +128, 32288);
+        do Memory.poke(memAddress +160, 32288);
+        do Memory.poke(memAddress +192, 32288);
+        do Memory.poke(memAddress +224, -4);
+        do Memory.poke(memAddress +256, -4);
+        do Memory.poke(memAddress +288, -4);
+        do Memory.poke(memAddress +320, -4);
+        do Memory.poke(memAddress +352, -1);
+        do Memory.poke(memAddress +384, -1);
+        do Memory.poke(memAddress +416, -4);
+        do Memory.poke(memAddress +448, -4);
+        do Memory.poke(memAddress +480, 32764);
+        do Memory.poke(memAddress +512, 32764);
+        do Memory.poke(memAddress +544, 8184);
+        do Memory.poke(memAddress +576, 4088);
+        do Memory.poke(memAddress +608, 3640);
+        do Memory.poke(memAddress +640, 3640);
+        do Memory.poke(memAddress +672, 3640);
+        do Memory.poke(memAddress +704, 3640);
+        // column 1
+        do Memory.poke(memAddress +225, 1);
+        do Memory.poke(memAddress +257, 3);
+        do Memory.poke(memAddress +289, 3);
+        do Memory.poke(memAddress +321, 3);
+        do Memory.poke(memAddress +353, 3);
+        do Memory.poke(memAddress +385, 3);
+        do Memory.poke(memAddress +417, 3);
+
+        // Direction Right 
+        // column 0
+        do Memory.poke(memAddress, 8128);
+        do Memory.poke(memAddress +32, 16368);
+        do Memory.poke(memAddress +64, -8);
+        do Memory.poke(memAddress +96, -8);
+        do Memory.poke(memAddress +128, 4600);
+        do Memory.poke(memAddress +160, 4600);
+        do Memory.poke(memAddress +192, 4600);
+        do Memory.poke(memAddress +224, -2);
+        do Memory.poke(memAddress +256, -1);
+        do Memory.poke(memAddress +288, -1);
+        do Memory.poke(memAddress +320, -1);
+        do Memory.poke(memAddress +352, -1);
+        do Memory.poke(memAddress +384, -1);
+        do Memory.poke(memAddress +416, -1);
+        do Memory.poke(memAddress +448, -4);
+        do Memory.poke(memAddress +480, -8);
+        do Memory.poke(memAddress +512, -8);
+        do Memory.poke(memAddress +544, 32736);
+        do Memory.poke(memAddress +576, 32704);
+        do Memory.poke(memAddress +608, 29120);
+        do Memory.poke(memAddress +640, 29120);
+        do Memory.poke(memAddress +672, 29120);
+        do Memory.poke(memAddress +704, 29120);
+        // column 1
+        do Memory.poke(memAddress +353, 3);
+        do Memory.poke(memAddress +385, 3);
+        return; 
+    }
+}

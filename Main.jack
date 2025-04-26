@@ -1,0 +1,23 @@
+// Main game is simlar to the di
+class Main { 
+
+    // Intialization function 
+    function void main() { 
+        var Player player1; 
+        let player1 = Player.new(0, 0);
+        do player1.draw(100);
+        do player1.draw(500);
+        return; 
+    }
+
+    function void initGameLoop() { 
+        while(true) { 
+            // Get input 
+
+            // Update positions 
+
+            // Draw to the screen 
+        }
+        return; 
+    } 
+}
