@@ -5,20 +5,93 @@ class Main {
     function void main() { 
         var Player player1; 
         let player1 = Player.new(0, 0);
-        do player1.draw(100);
-        do player1.draw(500);
-        if( Keyboard.keyPressed())
+        // If key pressed run game loop 
+
+        // Print starting message screen 
+        do Main.printStartMessage(); 
+
+        // Wait for any key to be pressed before continuin execution 
+        do Main.getKey(); 
+
+        // Jump to main game loop 
+        do Main.initGameLoop(); 
+        
+        
         return; 
     }
 
     function void initGameLoop() { 
-        while(true) { 
-            // Get input 
-
-            // Update positions 
-
-            // Draw to the screen 
-        }
+        do Screen.clearScreen(); 
+        do Memory.poke(16900, 255);
         return; 
     } 
+
+    function void getKey() { 
+        var int key; 
+        let key = Keyboard.readChar(); 
+
+        if (key = 0 ) { 
+            do Main.getKey(); 
+        } 
+
+        return; 
+    }
+
+    function void printStartMessage() { 
+        do Output.println();
+        do Output.println();
+        do Output.println();
+        do Output.println();
+        do Output.println();
+        do Output.printString(Main.makeStartMessage());
+        return;
+    }
+
+    function String makeStartMessage() {
+        var String s;
+        let s = String.new(37); // 12 spaces + 25 characters
+
+        // Add 12 leading spaces
+        do s.appendChar(32);
+        do s.appendChar(32);
+        do s.appendChar(32);
+        do s.appendChar(32);
+        do s.appendChar(32);
+        do s.appendChar(32);
+        do s.appendChar(32);
+        do s.appendChar(32);
+        do s.appendChar(32);
+        do s.appendChar(32);
+        do s.appendChar(32);
+        do s.appendChar(32);
+
+        // Append message: "Press any key to continue"
+        do s.appendChar(80);  // 'P'
+        do s.appendChar(114); // 'r'
+        do s.appendChar(101); // 'e'
+        do s.appendChar(115); // 's'
+        do s.appendChar(115); // 's'
+        do s.appendChar(32);  // ' '
+        do s.appendChar(97);  // 'a'
+        do s.appendChar(110); // 'n'
+        do s.appendChar(121); // 'y'
+        do s.appendChar(32);  // ' '
+        do s.appendChar(107); // 'k'
+        do s.appendChar(101); // 'e'
+        do s.appendChar(121); // 'y'
+        do s.appendChar(32);  // ' '
+        do s.appendChar(116); // 't'
+        do s.appendChar(111); // 'o'
+        do s.appendChar(32);  // ' '
+        do s.appendChar(99);  // 'c'
+        do s.appendChar(111); // 'o'
+        do s.appendChar(110); // 'n'
+        do s.appendChar(116); // 't'
+        do s.appendChar(105); // 'i'
+        do s.appendChar(110); // 'n'
+        do s.appendChar(117); // 'u'
+        do s.appendChar(101); // 'e'
+
+        return s;
+    }
 }
