@@ -1,12 +1,13 @@
 class PlayerNameScreen { 
 
+    field Array playerNames;
     // Default Constructor 
     constructor PlayerNameScreen new() { 
         return this;
     }
 
     // Print the player message to the screen 
-    function void printPlayerMessage() { 
+    function Array printPlayerMessage() { 
         var boolean running;
         var String player_one_name; 
         var String player_two_name; 
@@ -27,8 +28,15 @@ class PlayerNameScreen {
             // This is the code for the enter key so break out of this loop
             if(key = 128) { 
                 let running = false; 
+            } else { 
+                
+                if( ~(key = 0))  {
+                    do player_one_name.appendChar(key);
+                }
             }
         }
+        // Add player one to first index in array 
+        let playerNames[0] = plyer_one_name; 
         // Reset running for the next loop 
         let running = true; 
 
@@ -40,11 +48,21 @@ class PlayerNameScreen {
         while(running) { 
             let key = Keyboard.readChar(); 
             // This is the code for the enter key so break out of this loop
+            // This is the code for the enter key so break out of this loop
             if(key = 128) { 
                 let running = false; 
+            } else { 
+                
+                if( ~(key = 0))  {
+                    do player_one_name.appendChar(key);
+                }
             }
         }
-        return; 
+        // Add player two to the array 
+        let playerNames[1] = player_two_name; 
+
+        // Return the array 
+        return playerNames; 
     }
 
     function String makeNamePrompt(int playerNum) {
@@ -76,7 +94,14 @@ class PlayerNameScreen {
         do s.appendChar(97);   // 'a'
         do s.appendChar(109);  // 'm'
         do s.appendChar(101);  // 'e'
+        do s.appendChar(58);   // ':'
+        do s.appendChar(32);   // ' '
 
         return s;
+    }
+
+    // Return array of players 
+    method Array getPlayerNames() { 
+        return playerNames; 
     }
 }

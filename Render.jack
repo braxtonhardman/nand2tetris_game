@@ -1,0 +1,14 @@
+class Render { 
+
+    field Player player1;
+    field Player player2;
+
+    constructor Render new(Player p1, Player p2) { 
+        return this;
+    }
+
+    method void render() {
+        return; 
+    }
+
+}

@@ -1,9 +1,11 @@
 // Main game is simlar to the di
 class Main { 
 
+    field GameState gs; 
     // Intialization function 
     function void main() { 
-            
+        var Array playerNames; 
+        let playerNames = Array.new(2);  
         // Print starting message screen 
         do StartScreen.printStartMessage(); 
 
@@ -16,16 +18,31 @@ class Main {
         // Start input for player names 
         do PlayerNameScreen.printPlayerMessage();
 
+        // Get the array of playerNames 
+        let playerNames = PlayerNameScreen.getPlayerNames(); 
+
         // Jump to main game loop 
-        do Main.initGameLoop(); 
+        do Main.initGameLoop(playerNames); 
         
         
         return; 
     }
 
 
-    function void initGameLoop() { 
-         
+    function void initGameLoop(Array playerNames) { 
+        var boolean running; 
+        let running = true; 
+
+        let gs = GameState.new(playerNames); 
+
+        while(running) { 
+
+            // Get keyboard input 
+            
+            // Update Positions
+
+            // Draw to the screen 
+        }
         return; 
     } 
 
