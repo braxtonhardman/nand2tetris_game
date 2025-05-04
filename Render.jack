@@ -16,6 +16,7 @@ class Render {
         return; 
     }
 
+    // Draws a wall between the players 
     method void drawWall() {
         var int i;
         var int address;
