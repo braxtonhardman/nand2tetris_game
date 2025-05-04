@@ -11,7 +11,6 @@ class Main {
 
         let pns = PlayerNameScreen.new();
         let running = true; 
-        let input = Input.new(); 
 
         // Print starting message screen 
         do StartScreen.printStartMessage(); 
@@ -31,6 +30,9 @@ class Main {
         // Intalize render with the two players created in game state 
         let render = Render.new(gameState.getPlayer(1), gameState.getPlayer(2));
 
+        // Create input and pass in the player names
+        let input = Input.new(pns.getPlayerName(1), pns.getPlayerName(2));
+
         // Clear Screen before jumping into loop
         do Screen.clearScreen();
         
@@ -39,6 +41,7 @@ class Main {
 
             // Gets the keyboard input and displays the players turn 
             do input.runTurn(); 
+            
             // Update Positions
 
             // Draw to the screen 

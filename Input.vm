@@ -1,44 +1,544 @@
-function Input.new 0
-    push constant 2
+function Input.new 2
+    push constant 7
     call Memory.alloc 1
     pop pointer 0
+    push constant 25
+    call String.new 1
+    pop this 1
+    push constant 25
+    call String.new 1
+    pop this 2
     push constant 0
     pop this 0
-    call Slider.new 0
-    pop this 1
+    push constant 0
+    pop local 0
+label Input_0
+    push local 0
+    push argument 0
+    call String.length 1
+    lt
+    not
+    if-goto Input_1
+    push argument 0
+    push local 0
+    call String.charAt 2
+    pop local 1
+    push this 1
+    push local 1
+    call String.appendChar 2
+    pop temp 0
+    push local 0
+    push constant 1
+    add
+    pop local 0
+    goto Input_0
+label Input_1
+    push constant 0
+    pop local 0
+label Input_2
+    push local 0
+    push argument 1
+    call String.length 1
+    lt
+    not
+    if-goto Input_3
+    push argument 1
+    push local 0
+    call String.charAt 2
+    pop local 1
+    push this 2
+    push local 1
+    call String.appendChar 2
+    pop temp 0
+    push local 0
+    push constant 1
+    add
+    pop local 0
+    goto Input_2
+label Input_3
     push pointer 0
     return
-function Input.runTurn 0
+function Input.runTurn 3
     push argument 0
     pop pointer 0
+    push constant 1
+    neg
+    pop local 0
+    push constant 10
+    call String.new 1
+    pop this 4
+    push constant 10
+    call String.new 1
+    pop this 3
+    push pointer 0
+    call Input.printPlayerName 1
+    pop temp 0
+    call Output.println 0
+    pop temp 0
+    push pointer 0
+    call Input.createAnglePrompt 1
+    call Output.printString 1
+    pop temp 0
+label Input_4
+    push local 0
+    not
+    if-goto Input_5
+    call Keyboard.readChar 0
+    pop local 2
+    push local 2
+    push constant 128
+    eq
+    not
+    if-goto Input_7
+    push this 3
+    call String.intValue 1
+    pop local 1
+    push local 1
+    push constant 0
+    gt
+    push local 1
+    push constant 80
+    lt
+    and
+    not
+    if-goto Input_9
+    push local 1
+    pop this 5
+    push constant 0
+    pop local 0
+    goto Input_8
+label Input_9
+    call Output.println 0
+    pop temp 0
+    push pointer 0
+    call Input.createInvalidInput 1
+    call Output.printString 1
+    pop temp 0
+    push this 4
+    call String.dispose 1
+    pop temp 0
+    push constant 5
+    call String.new 1
+    pop this 3
+label Input_8
+    push constant 0
+    pop local 0
+    goto Input_6
+label Input_7
+    push local 2
+    push constant 0
+    eq
+    not
+    not
+    if-goto Input_11
+    push this 3
+    push local 2
+    call String.appendChar 2
+    pop temp 0
+    goto Input_10
+label Input_11
+label Input_10
+label Input_6
+    goto Input_4
+label Input_5
+    push constant 1
+    neg
+    pop local 0
+    call Output.println 0
+    pop temp 0
+    push pointer 0
+    call Input.createPowerPrompt 1
+    call Output.printString 1
+    pop temp 0
+label Input_12
+    push local 0
+    not
+    if-goto Input_13
+    call Keyboard.readChar 0
+    pop local 2
+    push local 2
+    push constant 128
+    eq
+    not
+    if-goto Input_15
+    push this 4
+    call String.intValue 1
+    pop local 1
+    push local 1
+    push constant 0
+    gt
+    push local 1
+    push constant 100
+    lt
+    and
+    not
+    if-goto Input_17
+    push local 1
+    pop this 6
+    push constant 0
+    pop local 0
+    goto Input_16
+label Input_17
+    call Output.println 0
+    pop temp 0
+    push pointer 0
+    call Input.createInvalidInput 1
+    call Output.printString 1
+    pop temp 0
+    push this 4
+    call String.dispose 1
+    pop temp 0
+    push constant 5
+    call String.new 1
+    pop this 4
+label Input_16
+    goto Input_14
+label Input_15
+    push local 2
+    push constant 0
+    eq
+    not
+    not
+    if-goto Input_19
+    push this 4
+    push local 2
+    call String.appendChar 2
+    pop temp 0
+    goto Input_18
+label Input_19
+label Input_18
+label Input_14
+    goto Input_12
+label Input_13
+    push constant 0
+    return
+function Input.createAnglePrompt 1
+    push argument 0
+    pop pointer 0
+    push constant 23
+    call String.new 1
+    pop local 0
+    push local 0
+    push constant 69
+    call String.appendChar 2
+    pop temp 0
+    push local 0
+    push constant 110
+    call String.appendChar 2
+    pop temp 0
+    push local 0
+    push constant 116
+    call String.appendChar 2
+    pop temp 0
+    push local 0
+    push constant 101
+    call String.appendChar 2
+    pop temp 0
+    push local 0
+    push constant 114
+    call String.appendChar 2
+    pop temp 0
+    push local 0
+    push constant 32
+    call String.appendChar 2
+    pop temp 0
+    push local 0
+    push constant 97
+    call String.appendChar 2
+    pop temp 0
+    push local 0
+    push constant 110
+    call String.appendChar 2
+    pop temp 0
+    push local 0
+    push constant 103
+    call String.appendChar 2
+    pop temp 0
+    push local 0
+    push constant 108
+    call String.appendChar 2
+    pop temp 0
+    push local 0
+    push constant 101
+    call String.appendChar 2
+    pop temp 0
+    push local 0
+    push constant 32
+    call String.appendChar 2
+    pop temp 0
+    push local 0
+    push constant 40
+    call String.appendChar 2
+    pop temp 0
+    push local 0
+    push constant 48
+    call String.appendChar 2
+    pop temp 0
+    push local 0
+    push constant 32
+    call String.appendChar 2
+    pop temp 0
+    push local 0
+    push constant 116
+    call String.appendChar 2
+    pop temp 0
+    push local 0
+    push constant 111
+    call String.appendChar 2
+    pop temp 0
+    push local 0
+    push constant 32
+    call String.appendChar 2
+    pop temp 0
+    push local 0
+    push constant 56
+    call String.appendChar 2
+    pop temp 0
+    push local 0
+    push constant 48
+    call String.appendChar 2
+    pop temp 0
+    push local 0
+    push constant 41
+    call String.appendChar 2
+    pop temp 0
+    push local 0
+    push constant 58
+    call String.appendChar 2
+    pop temp 0
+    push local 0
+    push constant 32
+    call String.appendChar 2
+    pop temp 0
+    push local 0
+    return
+function Input.createPowerPrompt 1
+    push argument 0
+    pop pointer 0
+    push constant 25
+    call String.new 1
+    pop local 0
+    push local 0
+    push constant 69
+    call String.appendChar 2
+    pop temp 0
+    push local 0
+    push constant 110
+    call String.appendChar 2
+    pop temp 0
+    push local 0
+    push constant 116
+    call String.appendChar 2
+    pop temp 0
+    push local 0
+    push constant 101
+    call String.appendChar 2
+    pop temp 0
+    push local 0
+    push constant 114
+    call String.appendChar 2
+    pop temp 0
+    push local 0
+    push constant 32
+    call String.appendChar 2
+    pop temp 0
+    push local 0
+    push constant 112
+    call String.appendChar 2
+    pop temp 0
+    push local 0
+    push constant 111
+    call String.appendChar 2
+    pop temp 0
+    push local 0
+    push constant 119
+    call String.appendChar 2
+    pop temp 0
+    push local 0
+    push constant 101
+    call String.appendChar 2
+    pop temp 0
+    push local 0
+    push constant 114
+    call String.appendChar 2
+    pop temp 0
+    push local 0
+    push constant 32
+    call String.appendChar 2
+    pop temp 0
+    push local 0
+    push constant 40
+    call String.appendChar 2
+    pop temp 0
+    push local 0
+    push constant 48
+    call String.appendChar 2
+    pop temp 0
+    push local 0
+    push constant 32
+    call String.appendChar 2
+    pop temp 0
+    push local 0
+    push constant 116
+    call String.appendChar 2
+    pop temp 0
+    push local 0
+    push constant 111
+    call String.appendChar 2
+    pop temp 0
+    push local 0
+    push constant 32
+    call String.appendChar 2
+    pop temp 0
+    push local 0
+    push constant 49
+    call String.appendChar 2
+    pop temp 0
+    push local 0
+    push constant 48
+    call String.appendChar 2
+    pop temp 0
+    push local 0
+    push constant 48
+    call String.appendChar 2
+    pop temp 0
+    push local 0
+    push constant 41
+    call String.appendChar 2
+    pop temp 0
+    push local 0
+    push constant 58
+    call String.appendChar 2
+    pop temp 0
+    push local 0
+    push constant 32
+    call String.appendChar 2
+    pop temp 0
+    push local 0
+    return
+function Input.createInvalidInput 1
+    push argument 0
+    pop pointer 0
+    push constant 20
+    call String.new 1
+    pop local 0
+    push local 0
+    push constant 69
+    call String.appendChar 2
+    pop temp 0
+    push local 0
+    push constant 114
+    call String.appendChar 2
+    pop temp 0
+    push local 0
+    push constant 114
+    call String.appendChar 2
+    pop temp 0
+    push local 0
+    push constant 111
+    call String.appendChar 2
+    pop temp 0
+    push local 0
+    push constant 114
+    call String.appendChar 2
+    pop temp 0
+    push local 0
+    push constant 58
+    call String.appendChar 2
+    pop temp 0
+    push local 0
+    push constant 32
+    call String.appendChar 2
+    pop temp 0
+    push local 0
+    push constant 73
+    call String.appendChar 2
+    pop temp 0
+    push local 0
+    push constant 110
+    call String.appendChar 2
+    pop temp 0
+    push local 0
+    push constant 118
+    call String.appendChar 2
+    pop temp 0
+    push local 0
+    push constant 97
+    call String.appendChar 2
+    pop temp 0
+    push local 0
+    push constant 108
+    call String.appendChar 2
+    pop temp 0
+    push local 0
+    push constant 105
+    call String.appendChar 2
+    pop temp 0
+    push local 0
+    push constant 100
+    call String.appendChar 2
+    pop temp 0
+    push local 0
+    push constant 32
+    call String.appendChar 2
+    pop temp 0
+    push local 0
+    push constant 105
+    call String.appendChar 2
+    pop temp 0
+    push local 0
+    push constant 110
+    call String.appendChar 2
+    pop temp 0
+    push local 0
+    push constant 112
+    call String.appendChar 2
+    pop temp 0
+    push local 0
+    push constant 117
+    call String.appendChar 2
+    pop temp 0
+    push local 0
+    push constant 116
+    call String.appendChar 2
+    pop temp 0
+    push local 0
+    return
+function Input.printPlayerName 0
+    push argument 0
+    pop pointer 0
+    push constant 0
+    push constant 0
+    call Output.moveCursor 2
+    pop temp 0
     push this 0
     push constant 0
     eq
     not
-    if-goto Input_1
+    if-goto Input_21
     push this 1
-    call Slider.draw 1
+    call Output.printString 1
     pop temp 0
-    goto Input_0
-label Input_1
-label Input_0
+    goto Input_20
+label Input_21
+    push this 2
+    call Output.printString 1
+    pop temp 0
+label Input_20
     push constant 0
     return
-function Input.getInput 1
+function Input.getPower 0
     push argument 0
     pop pointer 0
-    call Keyboard.readChar 0
-    pop local 0
-    push local 0
-    push constant 32
-    eq
-    not
-    if-goto Input_3
-    push constant 1
-    neg
+    push this 6
     return
-    goto Input_2
-label Input_3
+function Input.getAngle 0
+    push argument 0
+    pop pointer 0
+    push this 5
+    return
+function Input.dispose 0
+    push argument 0
+    pop pointer 0
     push constant 0
     return
-label Input_2

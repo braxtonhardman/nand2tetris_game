@@ -4,8 +4,6 @@ function Main.main 5
     push constant 1
     neg
     pop local 0
-    call Input.new 0
-    pop local 4
     call StartScreen.printStartMessage 0
     pop temp 0
     call StartScreen.getKey 0
@@ -31,6 +29,14 @@ function Main.main 5
     call GameState.getPlayer 2
     call Render.new 2
     pop local 3
+    push local 1
+    push constant 1
+    call PlayerNameScreen.getPlayerName 2
+    push local 1
+    push constant 2
+    call PlayerNameScreen.getPlayerName 2
+    call Input.new 2
+    pop local 4
     call Screen.clearScreen 0
     pop temp 0
 label Main_0

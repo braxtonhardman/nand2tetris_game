@@ -1,0 +1,14 @@
+function Ball.new 0
+    push constant 4
+    call Memory.alloc 1
+    pop pointer 0
+    push constant 0
+    pop this 0
+    push constant 0
+    pop this 1
+    push constant 0
+    pop this 3
+    push constant 0
+    pop this 2
+    push pointer 0
+    return

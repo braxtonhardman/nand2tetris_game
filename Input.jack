@@ -1,36 +1,238 @@
 class Input {
 
     field int turn; 
-    field Slider slider; 
+    field String player1Name, player2Name; 
+    field String angle, power; 
+    field int angleInt, powerInt; 
 
-    constructor Input new() { 
+    constructor Input new(String p1name, String p2name) { 
+        var int i;
+        var char c; 
+    
+        // Determine which way the player should be facing 
+        // Player1 always face right, Player2 faces left. 
+        let player1Name = String.new(25);
+        let player2Name = String.new(25);
         let turn = 0; 
-        let slider = Slider.new(); 
+
+        // Copies the name from playerName into the String name
+        let i = 0;
+        while (i < p1name.length()) {
+            let c = p1name.charAt(i);
+            do player1Name.appendChar(c);
+            let i = i + 1;
+        }
+
+        let i = 0; 
+        while (i < p2name.length()) {
+            let c = p2name.charAt(i);
+            do player2Name.appendChar(c);
+            let i = i + 1;
+        }
         return this;
     }
 
     method void runTurn() { 
-        // If turn is 0 it is player 1's turn else it is player 2's turn 
-        if(turn = 0) {
-            do slider.draw(); 
-        } else { 
+        var boolean running; 
+        var int temp; 
+        var char key; 
+        let running = true; 
 
+        // Create a new string 
+        let power = String.new(10);
+        let angle = String.new(10);
+        // If turn is 0 it is player 1's turn else it is player 2's turn 
+        do printPlayerName(); 
+        
+        // Move down 1 line 
+        do Output.println();
+
+        // Print the angle prompt 
+        do Output.printString(createAnglePrompt()); 
+
+        // First input for the angle 
+        while(running) { 
+            let key = Keyboard.readChar(); 
+            // This is the code for the enter key so break out of this loop
+            if(key = 128) { 
+                let temp = angle.intValue();
+
+                // Check to see if the power is between 0 and 100 
+                if((temp > 0) & (temp < 80)) { 
+                    let angleInt = temp; 
+                    let running = false; 
+                } else {  
+                    // Print out error message not valid input 
+                    do Output.println(); 
+                    do Output.printString(createInvalidInput());
+
+                    // Delete the old string 
+                    do power.dispose(); 
+
+                    // Create a new string
+                    let angle = String.new(5); 
+                }
+                let running = false; 
+            } else { 
+                
+                if( ~(key = 0))  {
+                    do angle.appendChar(key);
+                }
+            }
+        }
+        
+        let running = true; 
+        // Move down one line 
+        do Output.println(); 
+
+        // Print out the power prompt
+        do Output.printString(createPowerPrompt());
+
+        while(running) { 
+            let key = Keyboard.readChar(); 
+            // This is the code for the enter key so break out of this loop
+            if(key = 128) { 
+                let temp = power.intValue();
+                // Check to see if the power is between 0 and 100 
+                if((temp > 0) & (temp < 100)) { 
+                    let powerInt = temp; 
+                    let running = false; 
+                } else {  
+                    // Print out error message not valid input 
+                    do Output.println(); 
+                    do Output.printString(createInvalidInput());
+
+                    // Destroy the old string 
+                    do power.dispose(); 
+                    // Create a new string 
+                    let power = String.new(5); 
+                }
+                
+            } else { 
+                
+                if( ~(key = 0))  {
+                    do power.appendChar(key);
+                    
+                }
+            }
         }
         return; 
     }
 
-    method boolean getInput() { 
-        var char key; 
-        let key = Keyboard.readChar();
-        if(key = 32)  { 
-            return true; 
-        } else { 
-            return false;  
-        }
+    method String createAnglePrompt() { 
+        var String anglePrompt; 
+        let anglePrompt = String.new(23);
+        do anglePrompt.appendChar(69);   // 'E'
+        do anglePrompt.appendChar(110);  // 'n'
+        do anglePrompt.appendChar(116);  // 't'
+        do anglePrompt.appendChar(101);  // 'e'
+        do anglePrompt.appendChar(114);  // 'r'
+        do anglePrompt.appendChar(32);   // ' '
+        do anglePrompt.appendChar(97);   // 'a'
+        do anglePrompt.appendChar(110);  // 'n'
+        do anglePrompt.appendChar(103);  // 'g'
+        do anglePrompt.appendChar(108);  // 'l'
+        do anglePrompt.appendChar(101);  // 'e'
+        do anglePrompt.appendChar(32);   // ' '
+        do anglePrompt.appendChar(40);   // '('
+        do anglePrompt.appendChar(48);   // '0'
+        do anglePrompt.appendChar(32);   // ' '
+        do anglePrompt.appendChar(116);  // 't'
+        do anglePrompt.appendChar(111);  // 'o'
+        do anglePrompt.appendChar(32);   // ' '
+        do anglePrompt.appendChar(56);   // '8'
+        do anglePrompt.appendChar(48);   // '0'
+        do anglePrompt.appendChar(41);   // ')'
+        do anglePrompt.appendChar(58);   // ':'
+        do anglePrompt.appendChar(32);   // ' '
+        return anglePrompt; 
     }
 
-    
+    method String createPowerPrompt() { 
+        var String powerPrompt; 
+        let powerPrompt = String.new(25);
+        do powerPrompt.appendChar(69);   // 'E'
+        do powerPrompt.appendChar(110);  // 'n'
+        do powerPrompt.appendChar(116);  // 't'
+        do powerPrompt.appendChar(101);  // 'e'
+        do powerPrompt.appendChar(114);  // 'r'
+        do powerPrompt.appendChar(32);   // ' '
+        do powerPrompt.appendChar(112);  // 'p'
+        do powerPrompt.appendChar(111);  // 'o'
+        do powerPrompt.appendChar(119);  // 'w'
+        do powerPrompt.appendChar(101);  // 'e'
+        do powerPrompt.appendChar(114);  // 'r'
+        do powerPrompt.appendChar(32);   // ' '
+        do powerPrompt.appendChar(40);   // '('
+        do powerPrompt.appendChar(48);   // '0'
+        do powerPrompt.appendChar(32);   // ' '
+        do powerPrompt.appendChar(116);  // 't'
+        do powerPrompt.appendChar(111);  // 'o'
+        do powerPrompt.appendChar(32);   // ' '
+        do powerPrompt.appendChar(49);   // '1'
+        do powerPrompt.appendChar(48);   // '0'
+        do powerPrompt.appendChar(48);   // '0'
+        do powerPrompt.appendChar(41);   // ')'
+        do powerPrompt.appendChar(58);   // ':'
+        do powerPrompt.appendChar(32);   // ' '
+        return powerPrompt; 
+    }
 
+    method String createInvalidInput() { 
+        var String errorMsg;
 
+        let errorMsg = String.new(20);       // "Error: Invalid input" is 20 characters
+
+        do errorMsg.appendChar(69);          // 'E'
+        do errorMsg.appendChar(114);         // 'r'
+        do errorMsg.appendChar(114);         // 'r'
+        do errorMsg.appendChar(111);         // 'o'
+        do errorMsg.appendChar(114);         // 'r'
+        do errorMsg.appendChar(58);          // ':'
+        do errorMsg.appendChar(32);          // ' '
+        do errorMsg.appendChar(73);          // 'I'
+        do errorMsg.appendChar(110);         // 'n'
+        do errorMsg.appendChar(118);         // 'v'
+        do errorMsg.appendChar(97);          // 'a'
+        do errorMsg.appendChar(108);         // 'l'
+        do errorMsg.appendChar(105);         // 'i'
+        do errorMsg.appendChar(100);         // 'd'
+        do errorMsg.appendChar(32);          // ' '
+        do errorMsg.appendChar(105);         // 'i'
+        do errorMsg.appendChar(110);         // 'n'
+        do errorMsg.appendChar(112);         // 'p'
+        do errorMsg.appendChar(117);         // 'u'
+        do errorMsg.appendChar(116);         // 't'
+        return errorMsg; 
+    }
+
+    method void printPlayerName() { 
+        // Reset the cursors position 
+        do Output.moveCursor(0, 0);
+        if(turn = 0) { 
+            do Output.printString(player1Name);
+        } else { 
+            do Output.printString(player2Name);
+        }
+
+        return;
+    }
+
+    // Get the power as an Int 
+    method int getPower() { 
+        return powerInt;
+    }
+
+    // Get the angle as an Int 
+    method int getAngle() { 
+        return angleInt; 
+    }
+
+    // Dispose of the class when needed 
+    method void dispose() { 
+        return; 
+    }
+
+   
 
 } 
