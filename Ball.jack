@@ -1,0 +1,11 @@
+//This is the ball class for drawing the balls to hit the person
+//05/04/2025
+
+class Ball
+{
+    //Make the constructor for the ball
+    constructor Ball new()
+    {
+        return this;
+    }
+}
