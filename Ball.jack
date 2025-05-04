@@ -3,9 +3,16 @@
 
 class Ball
 {
+    field int x, y, height, speed;
+    
     //Make the constructor for the ball
     constructor Ball new()
     {
+        let x = 0;
+        let y = 0;
+        let speed = 0;
+        let height = 0;
         return this;
     }
+
 }

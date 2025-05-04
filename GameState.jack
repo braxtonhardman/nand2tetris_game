@@ -2,10 +2,12 @@ class GameState {
 
     field Player player1; 
     field Player player2; 
+    field Ball currentBall;
 
     constructor GameState new(String n1, String n2) { 
         let player1 = Player.new(true, n1);
         let player2 = Player.new(false, n2);
+        let currentBall = null;
         return this;
     }
 
