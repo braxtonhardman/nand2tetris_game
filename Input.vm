@@ -1,0 +1,44 @@
+function Input.new 0
+    push constant 2
+    call Memory.alloc 1
+    pop pointer 0
+    push constant 0
+    pop this 0
+    call Slider.new 0
+    pop this 1
+    push pointer 0
+    return
+function Input.runTurn 0
+    push argument 0
+    pop pointer 0
+    push this 0
+    push constant 0
+    eq
+    not
+    if-goto Input_1
+    push this 1
+    call Slider.draw 1
+    pop temp 0
+    goto Input_0
+label Input_1
+label Input_0
+    push constant 0
+    return
+function Input.getInput 1
+    push argument 0
+    pop pointer 0
+    call Keyboard.readChar 0
+    pop local 0
+    push local 0
+    push constant 32
+    eq
+    not
+    if-goto Input_3
+    push constant 1
+    neg
+    return
+    goto Input_2
+label Input_3
+    push constant 0
+    return
+label Input_2

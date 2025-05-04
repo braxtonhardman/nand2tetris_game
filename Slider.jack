@@ -1,0 +1,36 @@
+class Slider {
+
+    field int startX;
+    field int startY;
+    field Array intervals; 
+
+    // Intalize starting variable, but will be the same for every slider 
+    constructor Slider new() { 
+        let startX = 0; 
+        let startY = 0;
+        let intervals = Array.new(10);
+        return this; 
+    }
+
+    // Intalize the intervals array 
+    method void initIntervals() { 
+        let intervals[0] = 0;
+        let intervals[1] = 10;
+        let intervals[2] = 20;
+        let intervals[3] = 30;
+        let intervals[4] = 40;
+        let intervals[5] = 50;
+        let intervals[6] = 60;
+        let intervals[7] = 70;
+        let intervals[8] = 80;
+        let intervals[9] = 90;
+        return;
+    }
+
+    // int x1, int y1, int x2, int y2
+    method void draw() { 
+        // Draw the outline for the slider 
+        do Screen.drawRectangle(0, 0, 200, 100);
+        return; 
+    }
+}

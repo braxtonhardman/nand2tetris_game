@@ -7,9 +7,12 @@ class Main {
         var PlayerNameScreen pns; 
         var GameState gameState; 
         var Render render; 
+        var Input input; 
 
         let pns = PlayerNameScreen.new();
         let running = true; 
+        let input = Input.new(); 
+
         // Print starting message screen 
         do StartScreen.printStartMessage(); 
 
@@ -34,8 +37,8 @@ class Main {
         // Main Game Loop 
         while(running) { 
 
-            // Get keyboard input 
-            
+            // Gets the keyboard input and displays the players turn 
+            do input.runTurn(); 
             // Update Positions
 
             // Draw to the screen 
