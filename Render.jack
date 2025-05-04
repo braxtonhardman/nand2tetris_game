@@ -10,9 +10,24 @@ class Render {
     }
 
     method void draw() {
-        do player1.draw(200);
-        do player2.draw(500); 
+        do drawWall();
+        do player1.draw(7300);
+        do player2.draw(7320); 
         return; 
+    }
+
+    method void drawWall() {
+        var int i;
+        var int address;
+
+        let i = 128; // Start from middle row
+        while (i < 256) { // Go to bottom
+            let address = 16384 + (i * 32) + 16; // Center column (column 16)
+            do Memory.poke(address, -1); // Draw wall segment
+            let i = i + 1;
+        }
+
+        return;
     }
 
 }

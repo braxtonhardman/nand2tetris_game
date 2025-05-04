@@ -11,13 +11,48 @@ return
 function Render.draw 0
 push argument 0
 pop pointer 0
+push pointer 0
+call Render.drawWall 1
+pop temp 0
 push this 0
-push constant 200
+push constant 7300
 call Player.draw 2
 pop temp 0
 push this 1
-push constant 500
+push constant 7320
 call Player.draw 2
 pop temp 0
+push constant 0
+return
+function Render.drawWall 2
+push argument 0
+pop pointer 0
+push constant 128
+pop local 0
+label WHILE_EXP0
+push local 0
+push constant 256
+lt
+not
+if-goto WHILE_END0
+push constant 16384
+push local 0
+push constant 32
+call Math.multiply 2
+add
+push constant 16
+add
+pop local 1
+push local 1
+push constant 1
+neg
+call Memory.poke 2
+pop temp 0
+push local 0
+push constant 1
+add
+pop local 0
+goto WHILE_EXP0
+label WHILE_END0
 push constant 0
 return
