@@ -4,6 +4,6 @@ class GameState {
     field Player player2; 
 
     constructor GameState new(Array playerNames) { 
-        let player1 = Player.new()
+        return this;
     }
 }

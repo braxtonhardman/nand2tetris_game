@@ -2,7 +2,8 @@
 class Player { 
 
     field boolean facingRight; 
-    field String name 
+    field String name;
+    
     // Initalize player variables 
     constructor Player new(boolean direction, String playerName) {
         let facingRight = direction; 

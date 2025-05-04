@@ -1,27 +1,27 @@
 class PlayerNameScreen { 
 
-    field Array playerNames;
+    field String playerOneName;
+    field String playerTwoName;
+
     // Default Constructor 
     constructor PlayerNameScreen new() { 
+        let playerOneName = String.new(25);
+        let playerTwoName = String.new(25);
         return this;
     }
 
     // Print the player message to the screen 
-    function Array printPlayerMessage() { 
+    method void printPlayerMessage() { 
         var boolean running;
-        var String player_one_name; 
-        var String player_two_name; 
         var int key; 
 
         // Initalize variables 
         let running = true; 
-        let player_one_name = String.new(25);
-        let player_two_name = String.new(25);
 
         // Reset the cursor positon 
         do Output.moveCursor(0, 0);
         // Ask for player 1 input name 
-        do Output.printString(PlayerNameScreen.makeNamePrompt(49));
+        do Output.printString(makeNamePrompt(49));
         // Listen for keyboard input here using readChar 
         while(running) { 
             let key = Keyboard.readChar(); 
@@ -31,19 +31,18 @@ class PlayerNameScreen {
             } else { 
                 
                 if( ~(key = 0))  {
-                    do player_one_name.appendChar(key);
+                    do playerOneName.appendChar(key);
                 }
             }
         }
-        // Add player one to first index in array 
-        let playerNames[0] = plyer_one_name; 
+
         // Reset running for the next loop 
         let running = true; 
 
         // Move the line down 1 
         do Output.println(); 
         // Ask for player 2 input name
-        do Output.printString(PlayerNameScreen.makeNamePrompt(50));
+        do Output.printString(makeNamePrompt(50));
         // Listen for keyboard input here using readChar 
         while(running) { 
             let key = Keyboard.readChar(); 
@@ -54,22 +53,19 @@ class PlayerNameScreen {
             } else { 
                 
                 if( ~(key = 0))  {
-                    do player_one_name.appendChar(key);
+                    do playerTwoName.appendChar(key);
                 }
             }
         }
-        // Add player two to the array 
-        let playerNames[1] = player_two_name; 
 
-        // Return the array 
-        return playerNames; 
+        return; 
     }
 
-    function String makeNamePrompt(int playerNum) {
+    method String makeNamePrompt(int playerNum) {
         var String s;
 
         // Total length = 22 characters
-        let s = String.new(22);
+        let s = String.new(25);
 
         // Append each character in "Enter player 1's name"
         do s.appendChar(69);   // 'E'
@@ -100,8 +96,4 @@ class PlayerNameScreen {
         return s;
     }
 
-    // Return array of players 
-    method Array getPlayerNames() { 
-        return playerNames; 
-    }
 }

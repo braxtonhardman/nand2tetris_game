@@ -1,25 +1,28 @@
 function PlayerNameScreen.new 0
-push constant 0
+push constant 2
 call Memory.alloc 1
 pop pointer 0
+push constant 25
+call String.new 1
+pop this 0
+push constant 25
+call String.new 1
+pop this 1
 push pointer 0
 return
-function PlayerNameScreen.printPlayerMessage 4
+function PlayerNameScreen.printPlayerMessage 2
+push argument 0
+pop pointer 0
 push constant 0
 not
 pop local 0
-push constant 25
-call String.new 1
-pop local 1
-push constant 25
-call String.new 1
-pop local 2
 push constant 0
 push constant 0
 call Output.moveCursor 2
 pop temp 0
+push pointer 0
 push constant 49
-call PlayerNameScreen.makeNamePrompt 1
+call PlayerNameScreen.makeNamePrompt 2
 call Output.printString 1
 pop temp 0
 label WHILE_EXP0
@@ -27,8 +30,8 @@ push local 0
 not
 if-goto WHILE_END0
 call Keyboard.readChar 0
-pop local 3
-push local 3
+pop local 1
+push local 1
 push constant 128
 eq
 if-goto IF_TRUE0
@@ -38,15 +41,15 @@ push constant 0
 pop local 0
 goto IF_END0
 label IF_FALSE0
-push local 3
+push local 1
 push constant 0
 eq
 not
 if-goto IF_TRUE1
 goto IF_FALSE1
 label IF_TRUE1
+push this 0
 push local 1
-push local 3
 call String.appendChar 2
 pop temp 0
 label IF_FALSE1
@@ -58,8 +61,9 @@ not
 pop local 0
 call Output.println 0
 pop temp 0
+push pointer 0
 push constant 50
-call PlayerNameScreen.makeNamePrompt 1
+call PlayerNameScreen.makeNamePrompt 2
 call Output.printString 1
 pop temp 0
 label WHILE_EXP1
@@ -67,8 +71,8 @@ push local 0
 not
 if-goto WHILE_END1
 call Keyboard.readChar 0
-pop local 3
-push local 3
+pop local 1
+push local 1
 push constant 128
 eq
 if-goto IF_TRUE2
@@ -78,15 +82,15 @@ push constant 0
 pop local 0
 goto IF_END2
 label IF_FALSE2
-push local 3
+push local 1
 push constant 0
 eq
 not
 if-goto IF_TRUE3
 goto IF_FALSE3
 label IF_TRUE3
+push this 1
 push local 1
-push local 3
 call String.appendChar 2
 pop temp 0
 label IF_FALSE3
@@ -96,7 +100,9 @@ label WHILE_END1
 push constant 0
 return
 function PlayerNameScreen.makeNamePrompt 1
-push constant 22
+push argument 0
+pop pointer 0
+push constant 25
 call String.new 1
 pop local 0
 push local 0
@@ -152,7 +158,7 @@ push constant 32
 call String.appendChar 2
 pop temp 0
 push local 0
-push argument 0
+push argument 1
 call String.appendChar 2
 pop temp 0
 push local 0
