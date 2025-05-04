@@ -1,0 +1,36 @@
+class Input {
+
+    field int turn; 
+    field Slider slider; 
+
+    constructor Input new() { 
+        let turn = 0; 
+        let slider = Slider.new(); 
+        return this;
+    }
+
+    method void runTurn() { 
+        // If turn is 0 it is player 1's turn else it is player 2's turn 
+        if(turn = 0) {
+            //do slider.draw(); 
+        } else { 
+
+        }
+        return; 
+    }
+
+    method boolean getInput() { 
+        var char key; 
+        let key = Keyboard.readChar();
+        if(key = 32)  { 
+            return true; 
+        } else { 
+            return false;  
+        }
+    }
+
+    
+
+
+
+} 
