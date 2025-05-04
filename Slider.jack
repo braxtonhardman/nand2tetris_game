@@ -1,8 +1,10 @@
+//Slider class, controls and sets the speed for horizontal and vertical speed for player to select
 class Slider {
 
     field int x1, y1, x2, y2;
     field Array intervals; 
     field int ticks;
+    field int xPower, yPower;
 
     // Intalize starting variable, but will be the same for every slider 
     constructor Slider new() { 
