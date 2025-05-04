@@ -5,6 +5,8 @@ class Main {
     function void main() { 
         var boolean running; 
         var PlayerNameScreen pns; 
+        var GameState gameState; 
+        var Render render; 
 
         let pns = PlayerNameScreen.new();
         let running = true; 
@@ -17,8 +19,17 @@ class Main {
         // Reset Screen 
         do Screen.clearScreen(); 
 
-        // Start input for player names 
+        // Start input for player names stored in class 
         do pns.printPlayerMessage();
+
+        // Create new game state object with player names 
+        let gameState = GameState.new(pns.getPlayerName(1), pns.getPlayerName(2));
+
+        // Intalize render with the two players created in game state 
+        let render = Render.new(gameState.getPlayer(1), gameState.getPlayer(2));
+
+        // Clear Screen before jumping into loop
+        do Screen.clearScreen();
         
         // Main Game Loop 
         while(running) { 
@@ -28,6 +39,7 @@ class Main {
             // Update Positions
 
             // Draw to the screen 
+            do render.draw(); 
         }
 
         return; 

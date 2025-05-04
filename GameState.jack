@@ -3,7 +3,17 @@ class GameState {
     field Player player1; 
     field Player player2; 
 
-    constructor GameState new(Array playerNames) { 
+    constructor GameState new(String n1, String n2) { 
+        let player1 = Player.new(true, n1);
+        let player2 = Player.new(false, n2);
         return this;
+    }
+
+    method Player getPlayer(int playerNum) { 
+        if(playerNum = 1) { 
+            return player1;
+        } else { 
+            return player2; 
+        }
     }
 }

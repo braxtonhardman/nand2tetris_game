@@ -4,10 +4,14 @@ class Render {
     field Player player2;
 
     constructor Render new(Player p1, Player p2) { 
+        let player1 = p1; 
+        let player2 = p2; 
         return this;
     }
 
-    method void render() {
+    method void draw() {
+        do player1.draw(200);
+        do player2.draw(500); 
         return; 
     }
 

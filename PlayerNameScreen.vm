@@ -199,3 +199,19 @@ call String.appendChar 2
 pop temp 0
 push local 0
 return
+function PlayerNameScreen.getPlayerName 0
+push argument 0
+pop pointer 0
+push argument 1
+push constant 1
+eq
+if-goto IF_TRUE0
+goto IF_FALSE0
+label IF_TRUE0
+push this 0
+return
+goto IF_END0
+label IF_FALSE0
+push this 1
+return
+label IF_END0

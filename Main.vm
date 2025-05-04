@@ -1,4 +1,4 @@
-function Main.main 2
+function Main.main 4
 call PlayerNameScreen.new 0
 pop local 1
 push constant 0
@@ -13,10 +13,31 @@ pop temp 0
 push local 1
 call PlayerNameScreen.printPlayerMessage 1
 pop temp 0
+push local 1
+push constant 1
+call PlayerNameScreen.getPlayerName 2
+push local 1
+push constant 2
+call PlayerNameScreen.getPlayerName 2
+call GameState.new 2
+pop local 2
+push local 2
+push constant 1
+call GameState.getPlayer 2
+push local 2
+push constant 2
+call GameState.getPlayer 2
+call Render.new 2
+pop local 3
+call Screen.clearScreen 0
+pop temp 0
 label WHILE_EXP0
 push local 0
 not
 if-goto WHILE_END0
+push local 3
+call Render.draw 1
+pop temp 0
 goto WHILE_EXP0
 label WHILE_END0
 push constant 0

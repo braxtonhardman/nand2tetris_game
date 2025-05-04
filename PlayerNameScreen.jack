@@ -96,4 +96,12 @@ class PlayerNameScreen {
         return s;
     }
 
+    method String getPlayerName(int playerNum) { 
+        if(playerNum = 1) { 
+            return playerOneName;
+        } else { 
+            return playerTwoName; 
+        }
+    }
+
 }
