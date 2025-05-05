@@ -2,6 +2,7 @@
 class Player { 
 
     field boolean facingRight; 
+    field int x, y, width, height; 
     field String name;
 
     // Initalize player variables 
@@ -13,6 +14,8 @@ class Player {
         // Player1 always face right, Player2 faces left. 
         let facingRight = direction; 
         let name = String.new(25);
+        let width = 20; 
+        let height = 40; 
 
         // Copies the name from playerName into the String name
         let i = 0;
@@ -30,22 +33,13 @@ class Player {
         return; 
     }
 
-    method void draw(int location) {
+    method void draw() {
         var int memAddress;
-        var int x, y;
         var int temp; 
-        var int baseAddress, currentAddress, currentRow, currentColumn; 
 
-        let baseAddress = 16384 + ((y + currentRow) * 32); //this is our base address where our row starts
-        let currentAddress = baseAddress + x + currentColumn; //this is the offset for each column
+        let memAddress = 16384;
 
-        let memAddress = 16384 + location;
-
-        if (facingRight) {
-            do drawFacingRight(memAddress);
-        } else {
-            do drawFacingLeft(memAddress);
-        }
+        do Screen.drawRectangle(x, y, x + width, y + height);
 
         return;
     }
@@ -123,6 +117,12 @@ class Player {
 
     method String getName() { 
         return name;
+    }
+
+    method void setPos(int xPos, int yPos) { 
+        let x = xPos;
+        let y = yPos; 
+        return; 
     }
 
 }
