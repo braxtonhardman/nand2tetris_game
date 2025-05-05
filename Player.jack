@@ -34,10 +34,10 @@ class Player {
         var int memAddress;
         var int x, y;
         var int temp; 
-        var int baseAddress, currentAddress; 
+        var int baseAddress, currentAddress, currentRow, currentColumn; 
 
         let baseAddress = 16384 + ((y + currentRow) * 32); //this is our base address where our row starts
-        let currentAddress = baseAddress + x + currrentColumn; //this is the offset for each column
+        let currentAddress = baseAddress + x + currentColumn; //this is the offset for each column
 
         let memAddress = 16384 + location;
 
