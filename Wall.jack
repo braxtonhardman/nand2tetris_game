@@ -21,7 +21,7 @@ class Wall
     //draw method
     method void draw()
     {
-        //Make some variables needed for the draw calculations to keep track of the current row, column and address
+       /* //Make some variables needed for the draw calculations to keep track of the current row, column and address
         var int currentRow, currrentColumn, baseAddress, currentAddress;
 
         //we're gonna dynamically calculate the specific registers to color in and loop over via nested while
@@ -37,7 +37,10 @@ class Wall
                 let currrentColumn = currrentColumn + 1;
             }
             let currentRow = currentRow + 1;
-        }
+        }*/
+
+        do Screen.setColor(true);
+        do Screen.drawRectangle(x,y,(x+wallWidth), y+(wallLength));
         
         return;
     }
@@ -86,7 +89,7 @@ class Wall
         {
             let toReturn = true;
         }
-        
+
         return toReturn;
     }
 
