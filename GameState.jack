@@ -23,7 +23,7 @@ class GameState {
         var boolean running; 
         var boolean colliding; 
         var Player curPlayer;
-        var int x, y, i; 
+        var int x, y; 
         let running = true; 
         let colliding = false; 
          
@@ -33,7 +33,6 @@ class GameState {
             let curPlayer = getCurrentPlayer(); 
             let x = curPlayer.getX(); 
             let y = curPlayer.getY(); 
-            let i = 0; 
 
             //Draw the room and get user input
             do room.draw();
@@ -51,7 +50,6 @@ class GameState {
                 do currentBall.clearBall();
                 do update(currentBall); 
                 do draw(); 
-                let i = 0; 
             }
 
             
@@ -92,10 +90,10 @@ class GameState {
     method void draw()
     {
         //Draw each of our objects by calling their draw function
-        do player1.draw();
-        do player2.draw();
         do room.draw(); 
         do currentBall.draw();
+        do player1.draw();
+        do player2.draw();
         return;
     }
 }
