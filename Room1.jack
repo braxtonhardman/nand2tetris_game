@@ -14,8 +14,10 @@ class Room1
         let p1 = player1;
         let p2 = player2;
         let wall = Wall.new(16, 128, 128, 1);
-        let player1Address = 7300;
-        let player2Address = 7320;
+        
+        // Using the same player across classes 
+        do p1.setPos(400, 210);
+        do p2.setPos(100, 210);
 
         return this;
     }
@@ -24,8 +26,8 @@ class Room1
     method void draw()
     {
         //Draw each of our objects by calling their draw function
-        do p1.draw(player1Address);
-        do p2.draw(player2Address);
+        do p1.draw();
+        do p2.draw();
         do wall.draw();
 
         return;

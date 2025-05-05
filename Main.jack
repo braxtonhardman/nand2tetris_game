@@ -16,7 +16,6 @@ class Main {
 
         // Three main classes for controlling input, game positions, and drawing 
         var GameState gameState; 
-        var Render render; 
         var Input input; 
 
         let pns = PlayerNameScreen.new();
@@ -36,9 +35,6 @@ class Main {
 
         // Create new game state object with player names 
         let gameState = GameState.new(pns.getPlayerName(1), pns.getPlayerName(2));
-
-        // Intalize render with the two players created in game state 
-        //let render = Render.new(gameState.getPlayer(1), gameState.getPlayer(2));
 
         // Create input and pass in the player names
         let input = Input.new(pns.getPlayerName(1), pns.getPlayerName(2));
