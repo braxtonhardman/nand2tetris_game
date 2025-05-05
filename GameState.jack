@@ -26,6 +26,11 @@ class GameState {
         var int x, y; 
         let running = true; 
         let colliding = false; 
+
+        //draw room before player input
+        do room.draw();
+        do player1.draw();
+        do player2.draw();
          
         
         while(running) { 
@@ -34,7 +39,7 @@ class GameState {
             let x = curPlayer.getX(); 
             let y = curPlayer.getY(); 
 
-            //get user input
+            //grab user input
             do input.runTurn(curPlayer.getName()); 
             let powerX = input.getPowerX();
             let powerY = input.getPowerY(); 
@@ -44,6 +49,7 @@ class GameState {
             let currentBall = Ball.new(x, y, powerX, powerY, curPlayer.getFacingRight()); 
 
             //Draw everything before the loop starts 
+            do Screen.clearScreen();
             do draw();
 
             while(~ (colliding)) { 
