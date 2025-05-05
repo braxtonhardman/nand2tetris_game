@@ -3,12 +3,19 @@ class GameState {
     field Player player1; 
     field Player player2; 
     field Ball currentBall;
+    field int turn; 
 
     constructor GameState new(String n1, String n2) { 
         let player1 = Player.new(true, n1);
         let player2 = Player.new(false, n2);
+        let turn = 0; 
         let currentBall = null;
         return this;
+    }
+
+    method void update(int angle, int power) {
+
+        return; 
     }
 
     method Player getPlayer(int playerNum) { 
@@ -16,6 +23,21 @@ class GameState {
             return player1;
         } else { 
             return player2; 
+        }
+    }
+
+    method Player getCurrentPlayer() { 
+        if(turn = 0) { 
+            return player1;
+        } else { 
+            return player2; 
+        }
+    }
+    method String getCurrentPlayerName() { 
+        if(turn = 0) { 
+            return player1.getName(); 
+        } else { 
+            return player2.getName();
         }
     }
 }
