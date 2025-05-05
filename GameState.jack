@@ -52,7 +52,7 @@ class GameState {
             do Screen.clearScreen();
             do draw();
 
-            while(~(colliding)) { 
+            while(~ (colliding) & ~(currentBall.getBallStop())) { 
 
                 //draw update and clear the balls
                 if(~currentBall.getBallStop()) //only draw the ball if it isn't stopped
@@ -64,12 +64,23 @@ class GameState {
                 do draw(); 
             }
 
+            do switchTurn(); 
+
             
         }
 
         return; 
     }
 
+    method void switchTurn() { 
+        if(turn = 0) { 
+            let turn = 1; 
+        } else {
+            let turn = 0; 
+        }
+
+        return; 
+    }
     // Launch the ball and draw the ball 
     method void update(Ball currentBall) {        
         do currentBall.move(); 
