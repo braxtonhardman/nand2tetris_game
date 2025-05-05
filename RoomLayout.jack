@@ -13,4 +13,15 @@ class RoomLayout {
         do wall.draw(); 
         return; 
     }
+
+    //check whether or not the ball is colliding with the wall
+    method boolean collideCheck(int ballX, int ballY, int ballR)
+    {
+        //create the variable to return whether or not we are colliding in the room
+        var boolean toReturn;
+        let toReturn = wall.collideCheck(ballX, ballY, ballR);
+
+        return toReturn;
+
+    }
 }

@@ -5,7 +5,8 @@ class GameState {
     field Ball currentBall;
     field Input input; 
     field int turn, powerX, powerY; 
-    field RoomLayout room; 
+    field RoomLayout room;
+    field boolean colliding; //for checking the collision 
 
     constructor GameState new(Player p1, Player p2, RoomLayout r) { 
         let player1 = p1;
@@ -21,7 +22,6 @@ class GameState {
         
         //some variables needed for runing the room
         var boolean running; 
-        var boolean colliding; 
         var Player curPlayer;
         var int x, y; 
         let running = true; 
@@ -52,7 +52,7 @@ class GameState {
             do Screen.clearScreen();
             do draw();
 
-            while(~ (colliding)) { 
+            while(~(colliding)) { 
 
                 //draw update and clear the balls
                 if(~currentBall.getBallStop()) //only draw the ball if it isn't stopped
@@ -60,6 +60,7 @@ class GameState {
                     do currentBall.clearBall();
                     do update(currentBall); 
                 }
+                do checkCollision(); //check collison with player or obstacles
                 do draw(); 
             }
 
@@ -105,6 +106,22 @@ class GameState {
         do currentBall.draw();
         do player1.draw();
         do player2.draw();
+        return;
+    }
+
+    method void checkCollision() //method that checks if the ball hit a player or a wall 
+    {
+        //check collision with each entity in the room
+        if(~colliding)
+        {
+            let colliding = room.collideCheck(currentBall.getX(), currentBall.getY(),currentBall.getBallR());
+        }
+
+        /*if(~colliding)
+        {
+            let colliding = curPlayer.collideCheck();
+        }*/
+
         return;
     }
 }

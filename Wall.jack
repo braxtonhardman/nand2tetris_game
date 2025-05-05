@@ -42,7 +42,53 @@ class Wall
         return;
     }
     
+    //method for checking a collision with the wall
+    method boolean collideCheck(int ballX, int ballY, int ballR)
+    {
+        //basic setup
+        var boolean toReturn;
+        var int ballLeft, ballRight, ballTop, ballBottom; //4 points our of our ball
+        var int wallLeft, wallRight, wallTop, wallBottom; //same thing for our wall
+        let toReturn = false;
 
+        //set the values for our ball (gonna use the radius to the 4 points and check for overlap)
+        let ballLeft = ballX - ballR;
+        let ballRight = ballX + ballR;
+        let ballTop = ballY - ballR;
+        let ballBottom = ballY + ballR;
+
+        //Now do the same things for our wall
+        let wallLeft = x; //yes I know I'm reusing variables here but the naming convention helps me revisualie how to check the collision bounds
+        let wallRight = x + wallWidth;
+        let wallTop = y; //same thing here
+        let wallBottom = y + wallLength;
+
+        //Now check to see if the ball is touching the top of the wall
+        if((ballBottom = wallTop) & ((~(ballX < wallLeft)) & (~(ballX > wallRight))))
+        {
+            let toReturn = true;
+        }
+
+        //Now check the bottom of the wall
+        if((ballTop = wallBottom) & ((~(ballX < wallLeft)) & (~(ballX > wallRight))))
+        {
+            let toReturn = true;
+        }
+
+        //Now check the left of the wall
+        if((ballRight = wallLeft) & ((~(ballY < wallTop)) & (~(ballY > wallBottom))))
+        {
+            let toReturn = true;
+        }
+
+        //Now check the right of the wall
+        if((ballLeft = wallRight) & ((~(ballY < wallTop)) & (~(ballY > wallBottom))))
+        {
+            let toReturn = true;
+        }
+        
+        return toReturn;
+    }
 
 
 
