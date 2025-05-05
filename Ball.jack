@@ -5,7 +5,7 @@ class Ball
 {
     field int x, y, vx, vy, ballR; //basics for the ball height and speed and what not
     field int gravity; //gravity constants to work with our parabolic eqautions
-    field boolean right; //used to see what direction we need to go for x
+    field boolean right, ballStop; //used to see what direction we need to go for x and when to stop the ball
     
     //Make the constructor for the ball
     constructor Ball new(int startX, int startY, int xPow, int yPow, boolean rightIn)
@@ -16,6 +16,7 @@ class Ball
         let gravity = 2;
         let ballR = 5;
         let right = rightIn;
+        let ballStop = false;
 
         //Now set the values for how we are gonna calculate the ball movement
        if(right) //player is shooting right (adjust x velocity)
@@ -40,71 +41,77 @@ class Ball
         //variable declarations
         var int diameter; //diameter for the ball based on radius to use for boundry calculations
         var int prevX, prevY, dx, dy, drawX, drawY, steps, i, work; //these are gonna be used to smooth up animation
-        let diameter = Math.multiply(ballR,2);
-        let prevX = x;
-        let prevY = y;
 
-        //Update the position and then apply the gravity to vertical velocity (over time)
-        let x = x + vx;
-        let y = y + vy;
-        let vy = vy + gravity;
-
-        //check and make sure that X can't go above or below the memory mapp; Since diameter
-        if(x < (0 + diameter))
+        if(~ballStop)
         {
-            let x = (0 + diameter);
-        }
-        if(x > (511 - diameter))
-        {
-            let x = (511 - diameter);
-        }
+            let diameter = Math.multiply(ballR,2);
+            let prevX = x;
+            let prevY = y;
 
-        //Now do the same thing for Y
-        if(y < (0 + diameter))
-        {
-            let y = (0 + diameter);
-        }
-        if (y > (255 - diameter))
-        {
-            let y = (255 - diameter);
-        }
+            //Update the position and then apply the gravity to vertical velocity (over time)
+            let x = x + vx;
+            let y = y + vy;
+            let vy = vy + gravity;
 
-        //Now update ball animation and moveemnt for smoother motion
-        let dx = x - prevX; //deltaX
-        let dy = y - prevY; //deltaY
-
-        if(Math.abs(dx) > Math.abs(dy)) //determine if there is more change in the x or y for our animation
-        {
-            let steps = Math.abs(dx);
-        }
-        else
-        {
-            let steps = Math.abs(dy);
-        }
-
-        let i = 0;
-        while(i < steps) //loop over the number of steps to reanimate the change in that we covered
-        {
-            //guys this equation I found is called linear interploation to calculate the change. prevX = prevX + (dx * i) /steps
-            //drawX and drawY are abirtray values to track each time we draw and animate and also so that we don't override prevX and X
-            let drawX = prevX + Math.divide(Math.multiply(dx, i), steps);
-            let drawY = prevY + Math.divide(Math.multiply(dy, i), steps);
-
-            //now draw the balls
-            do Screen.setColor(true);
-            do Screen.drawCircle(drawX,drawY,ballR);
-
-            //Make the computer do work so the balls can show up on screen
-            let work = 0;
-            while(work < 1000) 
-            { 
-                let work = work + 1; 
+            //check and make sure that X can't go above or below the memory mapp; Since diameter
+            if(x < (0 + diameter))
+            {
+                let x = (0 + diameter);
+            }
+            if(x > (511 - diameter))
+            {
+                let x = (511 - diameter);
             }
 
-            do Screen.setColor(false);
-            do Screen.drawCircle(drawX,drawY,ballR);
-            let i = i + 1;
+            //Now do the same thing for Y
+            if(y < (0 + diameter))
+            {
+                let y = (0 + diameter);
+            }
+            if (y > (255 - diameter))
+            {
+                let y = (255 - diameter);
+                let vy = 0; //ball is on the ground
+                let vx = 0;
+                let ballStop = true; //make sure the ball doesn't move any more
+            }
 
+            //Now update ball animation and moveemnt for smoother motion
+            let dx = x - prevX; //deltaX
+            let dy = y - prevY; //deltaY
+
+            if(Math.abs(dx) > Math.abs(dy)) //determine if there is more change in the x or y for our animation
+            {
+                let steps = Math.abs(dx);
+            }
+            else
+            {
+                let steps = Math.abs(dy);
+            }
+
+            let i = 0;
+            while(i < steps) //loop over the number of steps to reanimate the change in that we covered
+            {
+                //guys this equation I found is called linear interploation to calculate the change. prevX = prevX + (dx * i) /steps
+                //drawX and drawY are abirtray values to track each time we draw and animate and also so that we don't override prevX and X
+                let drawX = prevX + Math.divide(Math.multiply(dx, i), steps);
+                let drawY = prevY + Math.divide(Math.multiply(dy, i), steps);
+
+                //now draw the balls
+                do Screen.setColor(true);
+                do Screen.drawCircle(drawX,drawY,ballR);
+
+                //Make the computer do work so the balls can show up on screen
+                let work = 0;
+                while(work < 1000) 
+                { 
+                    let work = work + 1; 
+                }
+
+                do Screen.setColor(false);
+                do Screen.drawCircle(drawX,drawY,ballR);
+                let i = i + 1;
+            }
         }
         return;
     }
@@ -132,5 +139,9 @@ class Ball
     method int getY()
     {
         return y;
+    }
+    method booleagetBallStop() //get whether or not the ball is stopped
+    {
+        return ballStop;
     }
 }

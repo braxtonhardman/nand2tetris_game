@@ -55,8 +55,11 @@ class GameState {
             while(~ (colliding)) { 
 
                 //draw update and clear the balls
-                do currentBall.clearBall();
-                do update(currentBall); 
+                if(~currentBall.getBallStop()) //only draw the ball if it isn't stopped
+                {
+                    do currentBall.clearBall();
+                    do update(currentBall); 
+                }
                 do draw(); 
             }
 

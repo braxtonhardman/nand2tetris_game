@@ -21,9 +21,9 @@ class Room1
         let room = RoomLayout.new(wall); 
         
         // set player position and memory address
-        do p1.setPos(100, 210);
+        do p1.setPos(60, 225);
         do p1.setMemAddress(7300);
-        do p2.setPos(400, 210);
+        do p2.setPos(385, 225);
         do p2.setMemAddress(7320);
 
         // Game state handles all the logic 

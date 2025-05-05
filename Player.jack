@@ -17,7 +17,7 @@ class Player {
         let facingRight = direction; 
         let name = String.new(10);
         let width = 20; 
-        let height = 40; 
+        let height = 30; 
 
         let memAddress = 16384;
 
@@ -42,9 +42,9 @@ class Player {
         var int temp; 
 
         //Draw the hitbox
-        /*do Screen.setColor(false);
-        do Screen.drawRectangle(x, y, x + width, y + height);*/
         do Screen.setColor(true);
+        do Screen.drawRectangle(x, y, x + width, y + height);
+        do Screen.setColor(false);
         if(facingRight) //draw the player facing right or left
         {
             do drawFacingRight();
