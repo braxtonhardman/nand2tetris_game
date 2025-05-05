@@ -1,8 +1,9 @@
-// Player will always stay stationary in the middle of the screen 
+//Player class to draw and show the player
 class Player { 
 
+    //Some instance class variables
     field boolean facingRight; 
-    field int x, y, width, height; 
+    field int x, y, width, height, memAddress; 
     field String name;
 
     // Initalize player variables 
@@ -16,6 +17,7 @@ class Player {
         let name = String.new(10);
         let width = 20; 
         let height = 40; 
+        let memAddress = 0; //default value will be set later
 
         // Copies the name from playerName into the String name
         let i = 0;
@@ -27,24 +29,37 @@ class Player {
         return this;
     }
     
-
     // Initalize player drawings based on key being held 
     method void initBitMap() { 
         return; 
     }
 
+    //draw the players
     method void draw() {
+        //initalize some varaibles
         var int memAddress;
         var int temp; 
-
         let memAddress = 16384;
 
-        do Screen.drawRectangle(x, y, x + width, y + height);
+        //Draw the hitbox
+        /*do Screen.setColor(false);
+        do Screen.drawRectangle(x, y, x + width, y + height);*/
+        do Screen.setColor(true);
+        if(facingRight) //draw the player facing right or left
+        {
+            do drawFacingRight();
+        }
+        else
+        {
+            do drawFacingLeft();
+        }
+
+        //Now draw the player
 
         return;
     }
 
-    method void drawFacingRight(int memAddress) { 
+    method void drawFacingRight() { 
         // column 0
         do Memory.poke(memAddress, 8188);
         do Memory.poke(memAddress +32, 4100);
@@ -77,7 +92,7 @@ class Player {
         return; 
     }
 
-    method void drawFacingLeft(int memAddress) { 
+    method void drawFacingLeft() { 
         // column 0
         do Memory.poke(memAddress, -128);
         do Memory.poke(memAddress +32, 128);
@@ -121,9 +136,15 @@ class Player {
     method int getY() { return y; }
     method int getFacingRight(){ return facingRight;}
 
-     method void setPos(int xPos, int yPos) { //set the position
+    method void setPos(int xPos, int yPos) //set the position
+    {
         let x = xPos;
         let y = yPos; 
         return; 
+    }
+    method void setMemAddress(int mem) //set the memory address
+    {
+        let memAddress = mem;
+        return;
     }
 }
