@@ -21,7 +21,7 @@ class GameState {
         var boolean running; 
         var boolean colliding; 
         var Player curPlayer;
-        var int x, y; 
+        var int x, y, i; 
         let running = true; 
         let colliding = false; 
          
@@ -30,6 +30,7 @@ class GameState {
             let curPlayer = getCurrentPlayer(); 
             let x = curPlayer.getX(); 
             let y = curPlayer.getY(); 
+            let i = 0; 
 
 
             do input.runTurn(curPlayer.getName()); 
@@ -41,9 +42,18 @@ class GameState {
             let currentBall = Ball.new(x, y, powerX, powerY); 
 
             while(~ (colliding)) { 
+
+                do currentBall.clearBall();
                 do update(currentBall); 
                 do draw(); 
+
+                while(i < 30000) { 
+                    let i = i + 1; 
+                }
+
+                let i = 0; 
             }
+
             
         }
 
@@ -85,7 +95,6 @@ class GameState {
         do player1.draw();
         do player2.draw();
         do room.draw(); 
-        do currentBall.clearBall();
         do currentBall.draw();
         return;
     }

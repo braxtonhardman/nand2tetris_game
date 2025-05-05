@@ -22,8 +22,8 @@ class Room1
         
         
         // Using the same player across classes 
-        do p1.setPos(400, 210);
-        do p2.setPos(100, 210);
+        do p1.setPos(100, 210);
+        do p2.setPos(400, 210);
 
         // Game state handles all the logic 
         let gameState = GameState.new(player1, player2, room);
