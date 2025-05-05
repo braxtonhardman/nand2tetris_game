@@ -37,7 +37,7 @@ class Player {
         var int memAddress;
         var int temp; 
 
-        let memAddress = 16384;
+        let memAddress = 16384; 
 
         do Screen.drawRectangle(x, y, x + width, y + height);
 
