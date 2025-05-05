@@ -140,7 +140,8 @@ class Ball
     {
         return y;
     }
-    method booleagetBallStop() //get whether or not the ball is stopped
+    
+    method boolean getBallStop() //get whether or not the ball is stopped
     {
         return ballStop;
     }
