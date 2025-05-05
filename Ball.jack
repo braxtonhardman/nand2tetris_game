@@ -67,6 +67,7 @@ class Ball
             if(y < (0 + diameter))
             {
                 let y = (0 + diameter);
+                let vy = 0; //hit the ceeling stop the ball
             }
             if (y > (255 - diameter))
             {
