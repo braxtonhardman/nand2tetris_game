@@ -26,8 +26,8 @@ class GameState {
         // x, y, xpow, ypow
         let currentBall = Ball.new(x, y, powerX, powerY);
 
-        do currentBall.draw(); 
         while( ~(colliding)) { 
+            do currentBall.move(); 
             do currentBall.draw();
         }
 
