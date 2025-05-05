@@ -30,24 +30,18 @@ class Input {
         return this;
     }
 
-    method void runTurn(String currentPlayer) { 
+    // Prompts and gets the power x 
+    method boolean powerXInput() { 
         var boolean running; 
         var int temp; 
         var char key; 
+
         let running = true; 
 
-        // Create a new string 
-        let powerX = String.new(10);
-        let powerY = String.new(10);
-       
-        // Reset the cursor 
-        do Output.moveCursor(0, 0);
-        do Output.printString(currentPlayer); 
-        
         // Move down 1 line 
         do Output.println();
 
-        // Print the angle prompt 
+        // Print the powerx prompt 
         do Output.printString(createPowerXPrompt()); 
 
         // First input for the angle 
@@ -55,12 +49,15 @@ class Input {
             let key = Keyboard.readChar(); 
             // This is the code for the enter key so break out of this loop
             if(key = 128) { 
+                // convert string to integer value for comparison 
                 let temp = powerX.intValue(); 
 
                 // Check to see if the power is between 0 and 100 
                 if((temp > 0) & (temp < 100)) { 
+                    // store powerx int 
                     let powerXInt = temp; 
                     let running = false; 
+                    return true; 
                 } else {  
                     // Print out error message not valid input 
                     do Output.println(); 
@@ -71,17 +68,29 @@ class Input {
 
                     // Create a new string
                     let powerX = String.new(5); 
+
+                    // return false given not valid input 
+                    return false;
                 }
-                let running = false; 
             } else { 
                 
+                // if a key is pressed append it to powerx 
                 if( ~(key = 0))  { 
                     do powerX.appendChar(key);
                 }
             }
         }
-        
-        let running = true; 
+        return false;
+    }
+
+    // Prompt and get the power y input
+    method boolean powerYInput() {
+        var boolean running; 
+        var int temp; 
+        var char key; 
+
+        let running = true;
+
         // Move down one line 
         do Output.println(); 
 
@@ -90,13 +99,19 @@ class Input {
 
         while(running) { 
             let key = Keyboard.readChar(); 
+
             // This is the code for the enter key so break out of this loop
             if(key = 128) { 
+
+                // Convert the string to an int 
                 let temp = powerY.intValue();
+
                 // Check to see if the power is between 0 and 100 
                 if((temp > 0) & (temp < 100)) { 
+                    //. store powery int 
                     let powerYInt = temp; 
                     let running = false; 
+                    return true; 
                 } else {  
                     // Print out error message not valid input 
                     do Output.println(); 
@@ -106,6 +121,9 @@ class Input {
                     do powerY.dispose(); 
                     // Create a new string 
                     let powerY = String.new(5); 
+
+                    // return false if not valid input 
+                    return false; 
                 }
                 
             } else { 
@@ -117,6 +135,38 @@ class Input {
             }
         }
 
+        return false; 
+    }
+
+    method void runTurn(String currentPlayer) { 
+        var boolean valid; 
+        var int temp; 
+        var char key; 
+        let valid = false; 
+        // Create a new string 
+        let powerX = String.new(10);
+        let powerY = String.new(10);
+       
+        // Reset the cursor 
+        do Output.moveCursor(0, 0);
+        do Output.printString(currentPlayer); 
+
+        // Get powerX if valid input (keeps calling powerX if not valid)
+        while( ~(valid)) { 
+            let valid = powerXInput(); 
+            do Output.println(); 
+        }
+        
+        // reset boolean to use for powery
+        let valid = false; 
+
+        // Get powerY if valid input (keeps calling powerY if not valid)
+        while( ~(valid)) { 
+            let valid = powerYInput(); 
+            do Output.println(); 
+        }
+        
+    
         // Clear the screen for the animation 
         do Screen.clearScreen(); 
 
