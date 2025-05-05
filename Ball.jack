@@ -3,20 +3,33 @@
 
 class Ball
 {
-    field int x, y, powerX, powerY, ballR; //basics for the ball height and speed and what not
-    field int t, gravity; //time and gravity constants to work with our parabolic eqautions
+    field int x, y, vx, vy, ballR; //basics for the ball height and speed and what not
+    field int gravity; //gravity constants to work with our parabolic eqautions
+    field boolean right; //used to see what direction we need to go for x
     
     //Make the constructor for the ball
-    constructor Ball new(int startX, int startY, int xPow, int yPow)
+    constructor Ball new(int startX, int startY, int xPow, int yPow, boolean rightIn)
     {
         // initialize all the fields correctly
         let x = startX;
         let y = startY;
-        let powerX = xPow;
-        let powerY = yPow;
-        let t = 0;
         let gravity = 2;
         let ballR = 5;
+        let right = rightIn;
+
+        //Now set the values for how we are gonna calculate the ball movement
+       if(right) //player is shooting right (adjust x velocity)
+       {
+            let vx = xPow;
+       }
+       else //player is shooting left so move x-pow to negative
+       {
+            let vx = -xPow;
+       }
+
+       //Now since we're dealing with pixel space closer to the ground means a positive y so we're gonan invert the y-value so the ball can go "up" in the user perspective
+       let vy = -yPow;
+
         return this;
     }   
 
@@ -24,41 +37,33 @@ class Ball
     //Now create the move function to calculate the ball's next x and y address
     method void move()
     {
-        //create the variables needed for our parabolic calculations
-        var int vx, vy, yDisplacement, diameter;
+        //create the diameter for the ball based on radius to use for boundry calculations
+        var int diameter;
+        let diameter = Math.multiply(ballR,2);
 
-        //set velocity x's value and then reset x's value
-        let vx = Math.multiply(powerX, t);
+        //Update the position and then apply the gravity to vertical velocity (over time)
         let x = x + vx;
-        let diameter = ballR * 2; //diameter for calculations of boundries
-
-        //Now set vy and ydisplacement and then set y by adding both of them to Y
-        //gonna use a very fun physicsy y velocity eqaution (powerY * t + 1/2 * Gravity * t^2) to calculate y displacement and what not
-        let vy = Math.multiply(powerY, t);
-        let yDisplacement = Math.divide(Math.multiply(gravity, Math.multiply(t,t)), 2);
-        let y = y + vy + yDisplacement;
-
-        //increment our time factor
-        let t = t + 1;
+        let y = y + vy;
+        let vy = vy + gravity;
 
         //check and make sure that X can't go above or below the memory mapp; Since diameter
-        if(x < (0+diameter))
+        if(x < (0 + diameter))
         {
-            let x = 10;
+            let x = (0 + diameter);
         }
         if(x > (511 - diameter))
         {
-            let x = 499;
+            let x = (511 - diameter);
         }
 
         //Now do the same thing for Y
         if(y < (0 + diameter))
         {
-            let y = 10;
+            let y = (0 + diameter);
         }
         if (y > (255 - diameter))
         {
-            let y = 245;
+            let y = (255 - diameter);
         }           
         return;
     }

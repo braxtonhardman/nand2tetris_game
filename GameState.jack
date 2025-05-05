@@ -39,7 +39,7 @@ class GameState {
             
             
              // x, y, xpow, ypow
-            let currentBall = Ball.new(x, y, powerX, powerY); 
+            let currentBall = Ball.new(x, y, powerX, powerY, curPlayer.getFacingRight()); 
 
             while(~ (colliding)) { 
 

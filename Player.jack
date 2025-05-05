@@ -115,22 +115,15 @@ class Player {
         return;
     }
 
-    method String getName() { 
-        return name;
-    }
+    //Some accessors and mutators for all the field variables to be used
+    method String getName() { return name; }
+    method int getX() { return x; }
+    method int getY() { return y; }
+    method int getFacingRight(){ return facingRight;}
 
-    method void setPos(int xPos, int yPos) { 
+     method void setPos(int xPos, int yPos) { //set the position
         let x = xPos;
         let y = yPos; 
         return; 
     }
-
-    method int getX() { 
-        return x; 
-    }
-
-    method int getY() { 
-        return y; 
-    }
-
 }
