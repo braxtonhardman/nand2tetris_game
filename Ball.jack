@@ -85,7 +85,7 @@ class Ball
         let i = 0;
         while(i < steps) //loop over the number of steps to reanimate the change in that we covered
         {
-            //guys this equation I found is called linear interploation to calculat the change. prevX = prevX + (dx * i) /steps
+            //guys this equation I found is called linear interploation to calculate the change. prevX = prevX + (dx * i) /steps
             //drawX and drawY are abirtray values to track each time we draw and animate and also so that we don't override prevX and X
             let drawX = prevX + Math.divide(Math.multiply(dx, i), steps);
             let drawY = prevY + Math.divide(Math.multiply(dy, i), steps);

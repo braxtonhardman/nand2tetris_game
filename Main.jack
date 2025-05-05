@@ -27,9 +27,7 @@ class Main {
 
         // Start input for player names stored in class 
         do pns.printPlayerMessage();
-
         
-
         // Clear Screen before jumping into loop
         do Screen.clearScreen();
 

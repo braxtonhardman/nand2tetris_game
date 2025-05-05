@@ -18,6 +18,8 @@ class GameState {
     }
 
     method void run() { 
+        
+        //some variables needed for runing the room
         var boolean running; 
         var boolean colliding; 
         var Player curPlayer;
@@ -25,14 +27,16 @@ class GameState {
         let running = true; 
         let colliding = false; 
          
-
+        
         while(running) { 
+            //set some values
             let curPlayer = getCurrentPlayer(); 
             let x = curPlayer.getX(); 
             let y = curPlayer.getY(); 
             let i = 0; 
 
-
+            //Draw the room and get user input
+            do room.draw();
             do input.runTurn(curPlayer.getName()); 
             let powerX = input.getPowerX();
             let powerY = input.getPowerY(); 
