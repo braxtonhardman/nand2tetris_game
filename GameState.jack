@@ -15,6 +15,22 @@ class GameState {
 
     // Launch the ball and draw the ball 
     method void update(int powerX, int powerY) {
+        var Player curPlayer;
+        var boolean colliding; 
+        var int x, y; 
+        let curPlayer = getCurrentPlayer(); 
+        let x = curPlayer.getX(); 
+        let y = curPlayer.getY(); 
+        let colliding = false; 
+
+        // x, y, xpow, ypow
+        let currentBall = Ball.new(x, y, powerX, powerY);
+
+        do currentBall.draw(); 
+        while( ~(colliding)) { 
+            do currentBall.draw();
+        }
+
         return; 
     }
 

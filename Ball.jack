@@ -9,15 +9,16 @@ class Ball
     //Make the constructor for the ball
     constructor Ball new(int startX, int startY, int xPow, int yPow)
     {
-       //initalize all the variables needed
-       let startX = x;
-       let startY = y;
-       let xPower = xPow;
-       let yPower = yPow;
-       let t = 0;
-       let gravity = 2;
-       return this;
-    }
+        // initialize all the fields correctly
+        let x = startX;
+        let y = startY;
+        let xPower = xPow;
+        let yPower = yPow;
+        let t = 0;
+        let gravity = 2;
+        return this;
+    }   
+
 
     //Now create the move function to calculate the ball's next x and y address
     method void move()
