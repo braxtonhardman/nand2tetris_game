@@ -1,6 +1,12 @@
 // Main game is simlar to the di
 class Main { 
 
+    //Create some field varaibles needed for initial room setup and for the methods
+    static Room1 room1;
+    static int currentRoom;
+
+    //Create a constructor for Main
+
     // Intialization function 
     function void main() { 
         var boolean running; 
@@ -11,7 +17,6 @@ class Main {
         // Three main classes for controlling input, game positions, and drawing 
         var GameState gameState; 
         var Input input; 
-        var Room1 firstRoom;
 
         let pns = PlayerNameScreen.new();
         let running = true; 
@@ -36,11 +41,17 @@ class Main {
 
         // Clear Screen before jumping into loop
         do Screen.clearScreen();
+
+        //initalize the values for the room and currentRoom before hopping into the game
+        let room1 = Room1.new(gameState.getPlayer(1), gameState.getPlayer(2));
+        let currentRoom = 1;
         
         while(running) { 
+            
+            //Draw the room
+            do udpateRoom();
 
-            let firstRoom = Room1.new(gameState.getPlayer(1), gameState.getPlayer(2));
-            // Gets the keyboard input and displays the players turn 
+           // Gets the keyboard input and displays the players turn 
             do input.runTurn(gameState.getCurrentPlayerName()); 
             let powerX = input.getPowerX(); 
             let powerY = input.getPowerY(); 
@@ -50,11 +61,44 @@ class Main {
 
             // Draw to the screen 
             do Screen.clearScreen();
-            do firstRoom.draw();
-            do Memory.deAlloc(firstRoom);
         }
 
         return; 
     }
 
+    method void udpateRoom() //function to update the room based on currentRoom
+    {
+
+        if(currentRoom = 1) //room1
+        {
+            do room1.draw();
+        }
+        if(currentRoom = 2) //room2
+        {
+            //Room2 logic
+        }
+        else //room 3
+        {
+            //room3 logic
+        }
+        return;
+    }
+
+    method void changeRoom() //chnage to the next room
+    {
+        if(currentRoom = 1) //change to room #2
+        {
+            do Memory.deAlloc(room1);
+            let currentRoom = 2;        
+        }
+        if(currentRoom = 2) //change to room #3
+        {
+            //Room change logic 
+        }
+        else
+        {
+            //Room 3 change logic (maybe potential winn game logic here)
+        }
+        return;
+    }
 }
