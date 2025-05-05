@@ -45,19 +45,24 @@ class Main {
         //initalize the values for the room and currentRoom before hopping into the game
         let room1 = Room1.new(gameState.getPlayer(1), gameState.getPlayer(2));
         let currentRoom = 1;
+
+        // Gets the keyboard input and displays the players turn 
+        do input.runTurn(gameState.getCurrentPlayerName()); 
+        let powerX = input.getPowerX(); 
+        let powerY = input.getPowerY();
         
         while(running) { 
             
             //Draw the room
-            do udpateRoom();
-
-           // Gets the keyboard input and displays the players turn 
-            do input.runTurn(gameState.getCurrentPlayerName()); 
-            let powerX = input.getPowerX(); 
-            let powerY = input.getPowerY(); 
+            do udpateRoom(); 
             
             // Update Positions
-            do gameState.update(powerX, powerY); 
+            do gameState.update(powerX, powerY);
+
+            //Get input for the next shot again
+            do input.runTurn(gameState.getCurrentPlayerName()); 
+            let powerX = input.getPowerX(); 
+            let powerY = input.getPowerY();
 
             // Draw to the screen 
             do Screen.clearScreen();

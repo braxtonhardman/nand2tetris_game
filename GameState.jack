@@ -30,7 +30,6 @@ class GameState {
         while(~(colliding)) { 
             
             do currentBall.clearBall();
-
             do currentBall.move(); 
             do currentBall.draw();
 
