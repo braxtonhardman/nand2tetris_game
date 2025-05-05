@@ -166,7 +166,6 @@ class Input {
             do Output.println(); 
         }
         
-    
         // Clear the screen for the animation 
         do Screen.clearScreen(); 
 

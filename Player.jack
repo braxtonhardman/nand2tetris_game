@@ -10,6 +10,7 @@ class Player {
     constructor Player new(boolean direction, String playerName) {
         var int i;
         var char c; 
+        
     
         // Determine which way the player should be facing 
         // Player1 always face right, Player2 faces left. 
@@ -17,7 +18,8 @@ class Player {
         let name = String.new(10);
         let width = 20; 
         let height = 40; 
-        let memAddress = 0; //default value will be set later
+
+        let memAddress = 16384;
 
         // Copies the name from playerName into the String name
         let i = 0;
@@ -37,9 +39,7 @@ class Player {
     //draw the players
     method void draw() {
         //initalize some varaibles
-        var int memAddress;
         var int temp; 
-        let memAddress = 16384;
 
         //Draw the hitbox
         /*do Screen.setColor(false);
@@ -144,7 +144,7 @@ class Player {
     }
     method void setMemAddress(int mem) //set the memory address
     {
-        let memAddress = mem;
+        let memAddress = mem + memAddress;
         return;
     }
 }
