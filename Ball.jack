@@ -3,7 +3,7 @@
 
 class Ball
 {
-    field int x, y, xPower, yPower; //basics for the ball height and speed and what not
+    field int x, y, powerX, powerY, ballR; //basics for the ball height and speed and what not
     field int t, gravity; //time and gravity constants to work with our parabolic eqautions
     
     //Make the constructor for the ball
@@ -12,10 +12,11 @@ class Ball
         // initialize all the fields correctly
         let x = startX;
         let y = startY;
-        let xPower = xPow;
-        let yPower = yPow;
+        let powerX = xPow;
+        let powerY = yPow;
         let t = 0;
         let gravity = 2;
+        let ballR = 5;
         return this;
     }   
 
@@ -24,21 +25,41 @@ class Ball
     method void move()
     {
         //create the variables needed for our parabolic calculations
-        var int vx, vy, yDisplacement;
+        var int vx, vy, yDisplacement, diameter;
 
         //set velocity x's value and then reset x's value
-        let vx = Math.multiply(xPower, t);
+        let vx = Math.multiply(powerX, t);
         let x = x + vx;
+        let diameter = ballR * 2; //diameter for calculations of boundries
 
         //Now set vy and ydisplacement and then set y by adding both of them to Y
-        //gonna use a very fun physicsy y velocity eqaution (yPower * t + 1/2 * Gravity * t^2) to calculate y displacement and what not
-        let vy = Math.multiply(yPower, t);
+        //gonna use a very fun physicsy y velocity eqaution (powerY * t + 1/2 * Gravity * t^2) to calculate y displacement and what not
+        let vy = Math.multiply(powerY, t);
         let yDisplacement = Math.divide(Math.multiply(gravity, Math.multiply(t,t)), 2);
-        let y = vy + yDisplacement;
+        let y = y + vy + yDisplacement;
 
         //increment our time factor
         let t = t + 1;
 
+        //check and make sure that X can't go above or below the memory mapp; Since diameter
+        if(x < (0+diameter))
+        {
+            let x = 10;
+        }
+        if(x > (511 - diameter))
+        {
+            let x = 499;
+        }
+
+        //Now do the same thing for Y
+        if(y < (0 + diameter))
+        {
+            let y = 10;
+        }
+        if (y > (255 - diameter))
+        {
+            let y = 245;
+        }           
         return;
     }
 
@@ -46,7 +67,7 @@ class Ball
     method void draw()
     {
         do Screen.setColor(true);
-        do Screen.drawCircle(x,y,2);
+        do Screen.drawCircle(x,y,ballR);
         return;
     }
 
