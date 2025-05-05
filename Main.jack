@@ -3,23 +3,18 @@ class Main {
 
     //Create some field varaibles needed for initial room setup and for the methods
     static Room1 room1;
+    static Room2 room2;
+    static Player player1, player2; 
     static int currentRoom;
 
     //Create a constructor for Main
 
     // Intialization function 
     function void main() { 
-        var boolean running; 
-        var int powerX, powerY;
         // Exactly like the name says gets the player names 
         var PlayerNameScreen pns; 
 
-        // Three main classes for controlling input, game positions, and drawing 
-        var GameState gameState; 
-        var Input input; 
-
         let pns = PlayerNameScreen.new();
-        let running = true; 
 
         // Print starting message screen 
         do StartScreen.printStartMessage(); 
@@ -33,60 +28,23 @@ class Main {
         // Start input for player names stored in class 
         do pns.printPlayerMessage();
 
-        // Create new game state object with player names 
-        let gameState = GameState.new(pns.getPlayerName(1), pns.getPlayerName(2));
-
-        // Create input and pass in the player names
-        let input = Input.new(pns.getPlayerName(1), pns.getPlayerName(2));
+        
 
         // Clear Screen before jumping into loop
         do Screen.clearScreen();
 
+        // create two players 
+        let player1 = Player.new(true, pns.getPlayerName(1));
+        let player2 = Player.new(false, pns.getPlayerName(2));
+
         //initalize the values for the room and currentRoom before hopping into the game
-        let room1 = Room1.new(gameState.getPlayer(1), gameState.getPlayer(2));
+        let room1 = Room1.new(player1, player2);
         let currentRoom = 1;
-
-        // Gets the keyboard input and displays the players turn 
-        do input.runTurn(gameState.getCurrentPlayerName()); 
-        let powerX = input.getPowerX(); 
-        let powerY = input.getPowerY();
         
-        while(running) { 
-            
-            //Draw the room
-            do udpateRoom(); 
-            
-            // Update Positions
-            do gameState.update(powerX, powerY);
-
-            //Get input for the next shot again
-            do input.runTurn(gameState.getCurrentPlayerName()); 
-            let powerX = input.getPowerX(); 
-            let powerY = input.getPowerY();
-
-            // Draw to the screen 
-            do Screen.clearScreen();
-        }
-
+        // run the current room 
+        do room1.run();
+        
         return; 
-    }
-
-    method void udpateRoom() //function to update the room based on currentRoom
-    {
-
-        if(currentRoom = 1) //room1
-        {
-            do room1.draw();
-        }
-        if(currentRoom = 2) //room2
-        {
-            //Room2 logic
-        }
-        else //room 3
-        {
-            //room3 logic
-        }
-        return;
     }
 
     method void changeRoom() //chnage to the next room

@@ -1,0 +1,16 @@
+class RoomLayout { 
+
+    field Wall wall; 
+
+    // Pass in your wall layouts 
+    constructor RoomLayout new(Wall w)  {
+        let wall = w; 
+        return this;
+    }
+
+    // Draw all the wallls in the class 
+    method void draw() {
+        do wall.draw(); 
+        return; 
+    }
+}
