@@ -34,10 +34,7 @@ class GameState {
             let x = curPlayer.getX(); 
             let y = curPlayer.getY(); 
 
-            //Draw the room and get user input
-            do room.draw();
-            do player1.draw();
-            do player2.draw();
+            //get user input
             do input.runTurn(curPlayer.getName()); 
             let powerX = input.getPowerX();
             let powerY = input.getPowerY(); 
@@ -45,6 +42,9 @@ class GameState {
             
              // x, y, xpow, ypow
             let currentBall = Ball.new(x, y, powerX, powerY, curPlayer.getFacingRight()); 
+
+            //Draw everything before the loop starts 
+            do draw();
 
             while(~ (colliding)) { 
 
