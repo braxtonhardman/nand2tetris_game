@@ -17,19 +17,30 @@ class GameState {
     method void update(int powerX, int powerY) {
         var Player curPlayer;
         var boolean colliding; 
-        var int x, y; 
+        var int x, y, temp, i; 
         let curPlayer = getCurrentPlayer(); 
         let x = curPlayer.getX(); 
         let y = curPlayer.getY(); 
         let colliding = false; 
+        let i = 0; 
 
         // x, y, xpow, ypow
         let currentBall = Ball.new(x, y, powerX, powerY);
 
         while(~(colliding)) { 
+            
             do currentBall.clearBall();
+
             do currentBall.move(); 
             do currentBall.draw();
+
+            // While loop to slow down for loop 
+            while(i < 2000) { 
+                let temp = temp + 1; 
+                let i = i + 1; 
+            }
+
+            let i = 0; 
         }
 
         return; 
