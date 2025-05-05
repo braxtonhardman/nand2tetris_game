@@ -36,6 +36,9 @@ class Player {
         var int y;
         var int temp; 
 
+        let baseAddress = 16384 + ((y + currentRow) * 32); //this is our base address where our row starts
+        let currentAddress = baseAddress + x + currrentColumn; //this is the offset for each column
+        
         let memAddress = 16384 + location;
 
         if (facingRight) {
@@ -121,5 +124,5 @@ class Player {
     method String getName() { 
         return name;
     }
-    
+
 }

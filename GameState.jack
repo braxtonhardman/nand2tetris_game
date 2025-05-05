@@ -13,8 +13,8 @@ class GameState {
         return this;
     }
 
-    method void update(int angle, int power) {
-
+    // Launch the ball and draw the ball 
+    method void update(int powerX, int powerY) {
         return; 
     }
 

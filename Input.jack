@@ -55,7 +55,7 @@ class Input {
             let key = Keyboard.readChar(); 
             // This is the code for the enter key so break out of this loop
             if(key = 128) { 
-                let temp = powerX.intValue();git 
+                let temp = powerX.intValue(); 
 
                 // Check to see if the power is between 0 and 100 
                 if((temp > 0) & (temp < 100)) { 
