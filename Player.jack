@@ -117,4 +117,9 @@ class Player {
         do Memory.poke(memAddress +737, 1);
         return;
     }
+
+    method String getName() { 
+        return name;
+    }
+    
 }

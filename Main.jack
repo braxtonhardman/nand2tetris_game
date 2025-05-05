@@ -4,7 +4,11 @@ class Main {
     // Intialization function 
     function void main() { 
         var boolean running; 
+        var int powerX, powerY;
+        // Exactly like the name says gets the player names 
         var PlayerNameScreen pns; 
+
+        // Three main classes for controlling input, game positions, and drawing 
         var GameState gameState; 
         var Render render; 
         var Input input; 
@@ -41,9 +45,12 @@ class Main {
 
             let firstRoom = Room1.new(gameState.getPlayer(1), gameState.getPlayer(2));
             // Gets the keyboard input and displays the players turn 
-            do input.runTurn(); 
+            do input.runTurn(gameState.getCurrentPlayerName()); 
+            let powerX = input.getPowerX(); 
+            let powerY = input.getPowerY(); 
             
             // Update Positions
+            do gameState.update(powerX, powerY); 
 
             // Draw to the screen 
             do Screen.clearScreen();
