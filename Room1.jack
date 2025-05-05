@@ -1,0 +1,40 @@
+//This class is the first room or first level where the players will battle it out
+
+class Room1
+{
+    //create the necessary variables for our room
+    field Wall wall;
+    field int player1Address, player2Address; //holds the addresses of each player
+    field Player p1, p2;
+
+    //Create the constructor
+    constructor Room1 new(Player player1, Player player2)
+    {
+        //GUYS HARDCODE IN VALUES FOR EACH ROOM HERE
+        let p1 = player1;
+        let p2 = player2;
+        let wall = Wall.new(16, 128, 128, 1);
+        let player1Address = 7300;
+        let player2Address = 7320;
+
+        return this;
+    }
+
+    //Create the draw method to draw the room
+    method void draw()
+    {
+        //Draw each of our objects by calling their draw function
+        do p1.draw(player1Address);
+        do p2.draw(player2Address);
+        do wall.draw();
+
+        return;
+    }
+
+    method boolean checkCollision() //collision check to come soon
+    {
+
+
+        return false;
+    }
+}

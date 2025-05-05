@@ -1,0 +1,56 @@
+//Wall class used to draw and keep wall objects
+
+class Wall
+{
+    //create the variables used to keep track of the specific wall
+    field int x, y, wallLength, wallWidth, address;
+
+    //Create the constructor
+    constructor Wall new(int xStart, int yStart, int startLength, int startWidth)
+    {
+        //set the values of the variables
+        let x = xStart;
+        let y = yStart;
+        let wallLength = startLength;
+        let wallWidth = startWidth;
+       // let address = startAddress;
+
+        return this;
+    }
+
+    //draw method
+    method void draw()
+    {
+        //Make some variables needed for the draw calculations to keep track of the current row, column and address
+        var int currentRow, currrentColumn, baseAddress, currentAddress;
+
+        //we're gonna dynamically calculate the specific registers to color in and loop over via nested while
+        let currentRow = 0;
+        while (currentRow < wallLength) 
+        {
+            let currrentColumn = 0;
+            while (currrentColumn < wallWidth) //inner loop to draw on each column in the row
+            {
+                let baseAddress = 16384 + ((y + currentRow) * 32); //this is our base address where our row starts
+                let currentAddress = baseAddress + x + currrentColumn; //this is the offset for each column
+                do Memory.poke(currentAddress, -1);
+                let currrentColumn = currrentColumn + 1;
+            }
+            let currentRow = currentRow + 1;
+        }
+        
+        return;
+    }
+    
+
+
+
+
+    //Create some accessors and mutators for the wallvalues for debugging and what not
+    method int getX(){return x;}
+    method int getY(){return y;}
+    method int getLength(){return wallLength;}
+    method int getWidth(){return wallWidth;}
+
+
+}

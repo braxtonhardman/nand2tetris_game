@@ -8,6 +8,7 @@ class Main {
         var GameState gameState; 
         var Render render; 
         var Input input; 
+        var Room1 firstRoom;
 
         let pns = PlayerNameScreen.new();
         let running = true; 
@@ -36,16 +37,19 @@ class Main {
         // Clear Screen before jumping into loop
         do Screen.clearScreen();
         
-        // Main Game Loop 
         while(running) { 
 
+            let firstRoom = Room1.new(gameState.getPlayer(1), gameState.getPlayer(2));
             // Gets the keyboard input and displays the players turn 
             do input.runTurn(); 
             
             // Update Positions
 
             // Draw to the screen 
-            do render.draw(); 
+            do Screen.clearScreen();
+            do firstRoom.draw();
+            //do render.draw(); 
+            do Memory.deAlloc(firstRoom);
         }
 
         return; 
