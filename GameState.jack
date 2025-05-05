@@ -36,6 +36,8 @@ class GameState {
 
             //Draw the room and get user input
             do room.draw();
+            do player1.draw();
+            do player2.draw();
             do input.runTurn(curPlayer.getName()); 
             let powerX = input.getPowerX();
             let powerY = input.getPowerY(); 
