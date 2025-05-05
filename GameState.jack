@@ -43,14 +43,10 @@ class GameState {
 
             while(~ (colliding)) { 
 
+                //draw update and clear the balls
                 do currentBall.clearBall();
                 do update(currentBall); 
                 do draw(); 
-
-                while(i < 30000) { 
-                    let i = i + 1; 
-                }
-
                 let i = 0; 
             }
 

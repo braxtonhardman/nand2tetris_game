@@ -37,9 +37,12 @@ class Ball
     //Now create the move function to calculate the ball's next x and y address
     method void move()
     {
-        //create the diameter for the ball based on radius to use for boundry calculations
-        var int diameter;
+        //variable declarations
+        var int diameter; //diameter for the ball based on radius to use for boundry calculations
+        var int prevX, prevY, dx, dy, drawX, drawY, steps, i, work; //these are gonna be used to smooth up animation
         let diameter = Math.multiply(ballR,2);
+        let prevX = x;
+        let prevY = y;
 
         //Update the position and then apply the gravity to vertical velocity (over time)
         let x = x + vx;
@@ -64,7 +67,45 @@ class Ball
         if (y > (255 - diameter))
         {
             let y = (255 - diameter);
-        }           
+        }
+
+        //Now update ball animation and moveemnt for smoother motion
+        let dx = x - prevX; //deltaX
+        let dy = y - prevY; //deltaY
+
+        if(Math.abs(dx) > Math.abs(dy)) //determine if there is more change in the x or y for our animation
+        {
+            let steps = Math.abs(dx);
+        }
+        else
+        {
+            let steps = Math.abs(dy);
+        }
+
+        let i = 0;
+        while(i < steps) //loop over the number of steps to reanimate the change in that we covered
+        {
+            //guys this equation I found is called linear interploation to calculat the change. prevX = prevX + (dx * i) /steps
+            //drawX and drawY are abirtray values to track each time we draw and animate and also so that we don't override prevX and X
+            let drawX = prevX + Math.divide(Math.multiply(dx, i), steps);
+            let drawY = prevY + Math.divide(Math.multiply(dy, i), steps);
+
+            //now draw the balls
+            do Screen.setColor(true);
+            do Screen.drawCircle(drawX,drawY,ballR);
+
+            //Make the computer do work so the balls can show up on screen
+            let work = 0;
+            while(work < 1000) 
+            { 
+                let work = work + 1; 
+            }
+
+            do Screen.setColor(false);
+            do Screen.drawCircle(drawX,drawY,ballR);
+            let i = i + 1;
+
+        }
         return;
     }
 
@@ -92,5 +133,4 @@ class Ball
     {
         return y;
     }
-
 }
