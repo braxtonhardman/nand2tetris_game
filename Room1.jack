@@ -17,7 +17,7 @@ class Room1
         let p2 = player2;
 
         // Create the room layout to keep track of the walls 
-        let room = RoomLayout.new(wall); 
+       // let room = RoomLayout.new(wall); 
         
         // set player position and memory address
         do p1.setPos(60, 225);
