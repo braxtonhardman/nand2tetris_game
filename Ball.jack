@@ -140,8 +140,26 @@ class Ball
         let i = 0;
         while(i < 3) {
 
-            //calculate size and draw it on the screen
+            //calculate size and check boudries
             let size = ballR + i * 3;
+            if (x < (0 + size)) //far left
+            {
+                let x = (0 + size);
+            }
+            if (x > (511 - size)) //far right
+            {
+                let x = (511 - size);
+            }
+            if (y < (0 + size)) //top
+            {
+                let y = (0 + size);
+            }
+            if (y > (255 - size)) //bottom
+            {
+                let y = (255 - size);
+            }
+            
+            //Draw the ball on the screen
             do Screen.setColor(true);
             do Screen.drawCircle(x, y, size);
 
@@ -177,6 +195,24 @@ class Ball
             if(i = 3) { //shoot them right
                 let rectX = x + 10;
                 let rectY = y;
+            }
+
+            //Now check the rectangles bondries
+            if (rectX < 0) //far left
+            {
+                let rectX = 0;
+            }
+            if (rectX > 507) //far right (507 sine our things are 4 pixels) 
+            {
+                let rectX = 507;
+            }
+            if (rectY < 0) //top
+            {
+                let rectY = 0;
+            }
+            if (rectY > 251) //bottom (same thing as the x 4 pixels)
+            {
+                let rectY = 251;
             }
 
             //Draw the rectangles
