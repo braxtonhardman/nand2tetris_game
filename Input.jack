@@ -275,7 +275,79 @@ class Input {
 
         return hitMsg;
     }
-    
+
+    method void printWinner(String playerName) //print the player that wins the room
+    {
+        //Create the message string for our wonderful player1
+        var String msg;
+        let msg = String.new(15);
+
+        //Print out the name of the player 
+        do Output.printString(playerName);
+
+        //Create the message
+        do msg.appendChar(32);   // ' '
+        do msg.appendChar(119);  // 'w'
+        do msg.appendChar(105);  // 'i'
+        do msg.appendChar(110);  // 'n'
+        do msg.appendChar(115);  // 's'
+        do msg.appendChar(32);   // ' '
+        do msg.appendChar(116);  // 't'
+        do msg.appendChar(104);  // 'h'
+        do msg.appendChar(101);  // 'e'
+        do msg.appendChar(32);   // ' '
+        do msg.appendChar(114);  // 'r'
+        do msg.appendChar(111);  // 'o'
+        do msg.appendChar(111);  // 'o'
+        do msg.appendChar(109);  // 'm'
+        do msg.appendChar(33);   // '!'
+
+        do Output.printString(msg);
+        do Output.println();
+        do msg.dispose(); //release our memory
+        do pressAnyKey();
+        return;   
+    }
+    method void pressAnyKey() //halts the screen until we press a key to continue the game
+    {
+        //create our variables
+        var String msg;
+
+        //Create the string
+        let msg = String.new(25); 
+        do msg.appendChar(80);   // 'P'
+        do msg.appendChar(114);  // 'r'
+        do msg.appendChar(101);  // 'e'
+        do msg.appendChar(115);  // 's'
+        do msg.appendChar(115);  // 's'
+        do msg.appendChar(32);   // ' '
+        do msg.appendChar(97);   // 'a'
+        do msg.appendChar(110);  // 'n'
+        do msg.appendChar(121);  // 'y'
+        do msg.appendChar(32);   // ' '
+        do msg.appendChar(107);  // 'k'
+        do msg.appendChar(101);  // 'e'
+        do msg.appendChar(121);  // 'y'
+        do msg.appendChar(32);   // ' '
+        do msg.appendChar(116);  // 't'
+        do msg.appendChar(111);  // 'o'
+        do msg.appendChar(32);   // ' '
+        do msg.appendChar(99);   // 'c'
+        do msg.appendChar(111);  // 'o'
+        do msg.appendChar(110);  // 'n'
+        do msg.appendChar(116);  // 't'
+        do msg.appendChar(105);  // 'i'
+        do msg.appendChar(110);  // 'n'
+        do msg.appendChar(117);  // 'u'
+        do msg.appendChar(101);  // 'e'
+
+        //print out and dispose the string and wait until a key is pressed
+        do Output.printString(msg);
+        do msg.dispose();
+        do Keyboard.readChar(); //wait until a key is pressed
+
+        return;
+    }    
 
     // Get the powerX as an Int 
     method int getPowerX() { 
@@ -290,8 +362,5 @@ class Input {
     // Dispose of the class when needed 
     method void dispose() { 
         return; 
-    }
-
-   
-
+    }  
 } 

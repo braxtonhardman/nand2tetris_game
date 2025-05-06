@@ -79,7 +79,7 @@ class GameState {
             //check and see if the roundisOver and if not then switch the turn
             if(roundOver)
             {
-                do Output.printInt(5);
+                do printWinner();
             }
             else //switch the turn and release the ball
             {
@@ -95,7 +95,7 @@ class GameState {
         if(turn = 0) { 
             let turn = 1; 
         } else {
-            let turn = 0; 
+            let turn = 0;
         }
 
         return; 
@@ -203,7 +203,7 @@ class GameState {
                             do input.hit();
                             if(player1Hit = 2) //stop the game if the player gets hit twice
                             {
-                                lroundOver = true;
+                                let roundOver = true;
                             }
                         }
                     }
@@ -220,6 +220,22 @@ class GameState {
                 let i = i + 1;
             }
         }
+        return;
+    }
+
+    method void printWinner() //this program essentially asks the input class to print the winner of the round
+    {
+        //call the input function to display the message on the screen
+        do Screen.clearScreen();
+        if(turn = 0) //player one wins
+        {
+            do input.printWinner(player1.getName());
+        }
+        else //player 2 wins
+        {
+            do input.printWinner(player2.getName());
+        }
+        do Screen.clearScreen(); //prep to go to the next room or end screen
         return;
     }
 }
