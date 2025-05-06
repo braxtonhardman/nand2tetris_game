@@ -52,21 +52,22 @@ class GameState {
             do Screen.clearScreen();
             do draw();
 
-            while(~ (colliding) & ~(currentBall.getBallStop())) { 
+            while(~(colliding) & ~(currentBall.getBallStop())) { 
 
                 //draw update and clear the balls
                 if(~currentBall.getBallStop()) //only draw the ball if it isn't stopped
                 {
-                    do currentBall.clearBall();
-                    do update(currentBall); 
+                    do checkCollision(); //check the next place the ball is going to go
+                    if(~colliding) //update the ball if it doesn't collide
+                    {
+                        do currentBall.clearBall();
+                        do update(currentBall); 
+                    }
                 }
-                do checkCollision(); //check collison with player or obstacles
                 do draw(); 
             }
 
-            do switchTurn(); 
-
-            
+            do switchTurn();  
         }
 
         return; 
@@ -122,10 +123,52 @@ class GameState {
 
     method void checkCollision() //method that checks if the ball hit a player or a wall 
     {
+        var int x, y, vx, vy, prevX; //these we are getting with accessors 
+        var int prevY, dx, dy, drawX, drawY, steps, i, work; //these we are initalizing and calculating
+        
         //check collision with each entity in the room
         if(~colliding)
         {
-            let colliding = room.collideCheck(currentBall.getX(), currentBall.getY(),currentBall.getBallR());
+            //Now grab all the data from the ball and check the collision (this is pretty much a modified copy of the code in the Ball class (not very single resposnbility principle lol))
+            let vx = currentBall.getVX();
+            let vy = currentBall.getVY();
+            let x = currentBall.getX() + vx;
+            let y = currentBall.getY() + vy;
+            let prevX = currentBall.getX();
+            let prevY = currentBall.getY();
+
+            //Now create the other values that we are using
+            //Now update ball animation and moveemnt for smoother motion
+            let dx = x - prevX; //deltaX
+            let dy = y - prevY; //deltaY
+
+            if(Math.abs(dx) > Math.abs(dy)) //determine if there is more change in the x or y for our animation
+            {
+                let steps = Math.abs(dx);
+            }
+            else
+            {
+                let steps = Math.abs(dy);
+            }
+
+            let i = 0;
+            while((i < steps) & ~(colliding)) //loop over the number of steps to reanimate the change in that we covered
+            {
+                //guys this equation I found is called linear interploation to calculate the change. prevX = prevX + (dx * i) /steps
+                //drawX and drawY are abirtray values to track each time we draw and animate and also so that we don't override prevX and X
+                let drawX = prevX + Math.divide(Math.multiply(dx, i), steps);
+                let drawY = prevY + Math.divide(Math.multiply(dy, i), steps);
+
+                //Now check the collisions
+                let colliding = room.collideCheck(drawX, drawY, currentBall.getBallR());
+                if(colliding) //adjust the x values if we collide and then animate to X
+                {
+                    do currentBall.setX(drawX);
+                    do currentBall.setY(drawY);
+                    do currentBall.animateToNewBall();
+                }
+                let i = i + 1;
+            }
         }
 
         /*if(~colliding)

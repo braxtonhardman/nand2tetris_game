@@ -12,7 +12,7 @@ class Room1
     {
         var Wall w; 
         var RoomLayout room; 
-        let wall = Wall.new(300, 128, 128, 50);
+        let wall = Wall.new(250, 128, 128, 50);
         //GUYS HARDCODE IN VALUES FOR EACH ROOM HERE
         let p1 = player1;
         let p2 = player2;

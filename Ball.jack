@@ -6,6 +6,7 @@ class Ball
     field int x, y, vx, vy, ballR; //basics for the ball height and speed and what not
     field int gravity; //gravity constants to work with our parabolic eqautions
     field boolean right, ballStop; //used to see what direction we need to go for x and when to stop the ball
+    field int prevX, prevY; //used to keep track of the previous ball
     
     //Make the constructor for the ball
     constructor Ball new(int startX, int startY, int xPow, int yPow, boolean rightIn)
@@ -17,6 +18,10 @@ class Ball
         let ballR = 5;
         let right = rightIn;
         let ballStop = false;
+
+        //initalize the prevX and Y for later calculations
+        let prevX = 0;
+        let prevY = 0;
 
         //Now set the values for how we are gonna calculate the ball movement
        if(right) //player is shooting right (adjust x velocity)
@@ -40,7 +45,6 @@ class Ball
     {
         //variable declarations
         var int diameter; //diameter for the ball based on radius to use for boundry calculations
-        var int prevX, prevY, dx, dy, drawX, drawY, steps, i, work; //these are gonna be used to smooth up animation
 
         if(~ballStop)
         {
@@ -76,44 +80,54 @@ class Ball
                 let vx = 0;
                 let ballStop = true; //make sure the ball doesn't move any more
             }
-
-            //Now update ball animation and moveemnt for smoother motion
-            let dx = x - prevX; //deltaX
-            let dy = y - prevY; //deltaY
-
-            if(Math.abs(dx) > Math.abs(dy)) //determine if there is more change in the x or y for our animation
-            {
-                let steps = Math.abs(dx);
-            }
-            else
-            {
-                let steps = Math.abs(dy);
-            }
-
-            let i = 0;
-            while(i < steps) //loop over the number of steps to reanimate the change in that we covered
-            {
-                //guys this equation I found is called linear interploation to calculate the change. prevX = prevX + (dx * i) /steps
-                //drawX and drawY are abirtray values to track each time we draw and animate and also so that we don't override prevX and X
-                let drawX = prevX + Math.divide(Math.multiply(dx, i), steps);
-                let drawY = prevY + Math.divide(Math.multiply(dy, i), steps);
-
-                //now draw the balls
-                do Screen.setColor(true);
-                do Screen.drawCircle(drawX,drawY,ballR);
-
-                //Make the computer do work so the balls can show up on screen
-                let work = 0;
-                while(work < 1000) 
-                { 
-                    let work = work + 1; 
-                }
-
-                do Screen.setColor(false);
-                do Screen.drawCircle(drawX,drawY,ballR);
-                let i = i + 1;
-            }
         }
+        do animateToNewBall();
+
+        return;
+    }
+
+    method void animateToNewBall() //this method animates the ball to the X value
+    {
+        //variables used to do the calculation
+        var int dx, dy, drawX, drawY, steps, i, work;
+
+        //Now update ball animation and moveemnt for smoother motion
+        let dx = x - prevX; //deltaX
+        let dy = y - prevY; //deltaY
+
+        if(Math.abs(dx) > Math.abs(dy)) //determine if there is more change in the x or y for our animation
+        {
+            let steps = Math.abs(dx);
+        }
+        else
+        {
+            let steps = Math.abs(dy);
+        }
+
+        let i = 0;
+        while(i < steps) //loop over the number of steps to reanimate the change in that we covered
+        {
+            //guys this equation I found is called linear interploation to calculate the change. prevX = prevX + (dx * i) /steps
+            //drawX and drawY are abirtray values to track each time we draw and animate and also so that we don't override prevX and X
+            let drawX = prevX + Math.divide(Math.multiply(dx, i), steps);
+            let drawY = prevY + Math.divide(Math.multiply(dy, i), steps);
+
+            //now draw the balls
+            do Screen.setColor(true);
+            do Screen.drawCircle(drawX,drawY,ballR);
+
+            //Make the computer do work so the balls can show up on screen
+            let work = 0;
+            while(work < 1000) 
+            { 
+                let work = work + 1; 
+            }
+
+            do Screen.setColor(false);
+            do Screen.drawCircle(drawX,drawY,ballR);
+            let i = i + 1;
+        }
+
         return;
     }
 
@@ -133,6 +147,16 @@ class Ball
     }
 
     //couple accessors and mutators for the current x & y of the ball
+    method void setX(int xIn)
+    {
+        let x = xIn;
+        return;
+    }
+    method void setY(int yIn)
+    {
+        let y = yIn;
+        return;
+    }
     method int getX()
     {
         return x;
@@ -140,6 +164,14 @@ class Ball
     method int getY()
     {
         return y;
+    }
+    method int getVX()
+    {
+        return vx;
+    }
+    method int getVY()
+    {
+        return vy;
     }
     method boolean getBallStop() //get whether or not the ball is stopped
     {
