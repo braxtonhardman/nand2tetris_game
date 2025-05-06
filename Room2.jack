@@ -1,8 +1,0 @@
-class Room2 { 
-
-    field Wall wall; 
-    
-    constructor Room2 new() { 
-        return this; 
-    }
-}

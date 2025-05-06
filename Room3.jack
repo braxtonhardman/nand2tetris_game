@@ -1,8 +1,0 @@
-class Room3 { 
-
-    field GameState gameState; 
-    constructor Room3 new() { 
-
-        return this; 
-    }
-}

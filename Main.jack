@@ -2,8 +2,7 @@
 class Main { 
 
     //Create some field varaibles needed for initial room setup and for the methods
-    static Room1 room1;
-    static Room2 room2;
+    static RoomLayout room;
     static Player player1, player2; 
     static int currentRoom;
 
@@ -35,20 +34,19 @@ class Main {
         let player1 = Player.new(true, pns.getPlayerName(1));
         let player2 = Player.new(false, pns.getPlayerName(2));
 
-        //initalize the values for the room and currentRoom before hopping into the game
-        let room1 = Room1.new(player1, player2);
-        let currentRoom = 1;
-        
-        // run the current room 
-        do room1.run();
-        do room1.dispose(); //clean up memory
-        
+        //initalize the values for the first Room
+        let room = RoomLayout.new(player1, player2);
+        do room.addWall(250,128,128,50);
+        do room.setPlayerInfo(60,225,7300,380,225,7320);
+        do room.run();
+        do room.dispose();
+
         return; 
     }
 
     method void changeRoom() //chnage to the next room
     {
-        if(currentRoom = 1) //change to room #2
+        /*if(currentRoom = 1) //change to room #2
         {
             do Memory.deAlloc(room1);
             let currentRoom = 2;        
@@ -60,7 +58,7 @@ class Main {
         else
         {
             //Room 3 change logic (maybe potential winn game logic here)
-        }
+        }*/
         return;
     }
 }
