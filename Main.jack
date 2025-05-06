@@ -41,6 +41,7 @@ class Main {
         
         // run the current room 
         do room1.run();
+        do room1.dispose(); //clean up memory
         
         return; 
     }

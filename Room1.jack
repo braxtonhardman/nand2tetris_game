@@ -6,12 +6,11 @@ class Room1
     field Wall wall;
     field Player p1, p2;
     field GameState gameState; 
+    field RoomLayout room; 
 
     //Create the constructor
     constructor Room1 new(Player player1, Player player2)
     {
-        var Wall w; 
-        var RoomLayout room; 
         let wall = Wall.new(250, 128, 128, 50);
         //GUYS HARDCODE IN VALUES FOR EACH ROOM HERE
         let p1 = player1;
@@ -35,5 +34,13 @@ class Room1
     method void run() { 
         do gameState.run(); 
         return; 
-    }    
+    }
+
+    method void dispose() //clean some game state memory
+    {
+        do Memory.deAlloc(gameState);
+        do Memory.deAlloc(wall);
+        do Memory.deAlloc(room);
+        return;
+    }   
 }
