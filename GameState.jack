@@ -7,6 +7,7 @@ class GameState {
     field int turn, powerX, powerY, player1Hit, player2Hit; 
     field RoomLayout room;
     field boolean colliding; //for checking the collision 
+    field boolean roundOver; //variable that holds if the game is over
 
     constructor GameState new(Player p1, Player p2, RoomLayout r) { 
         let player1 = p1;
@@ -17,16 +18,14 @@ class GameState {
         let input = Input.new(player1.getName(), player2.getName());
         let player1Hit = 0;
         let player2Hit = 0;
+        let roundOver = false;
         return this;
     }
 
     method void run() { 
-        
         //some variables needed for runing the room
-        var boolean running; 
         var Player curPlayer;
         var int x, y; 
-        let running = true; 
        // let colliding = false; 
         // do Output.printInt(colliding);
 
@@ -37,7 +36,7 @@ class GameState {
         do player2.draw();
          
         
-        while(running) { 
+        while(~roundOver) { 
             //set some values
             let curPlayer = getCurrentPlayer(); 
             let x = curPlayer.getX(); 
@@ -77,7 +76,16 @@ class GameState {
                 do draw(); 
             }
 
-            do switchTurn();  
+            //check and see if the roundisOver and if not then switch the turn
+            if(roundOver)
+            {
+                do Output.printInt(5);
+            }
+            else //switch the turn and release the ball
+            {
+               do switchTurn();
+               do Memory.deAlloc(currentBall);  
+            }
         }
 
         return; 
@@ -180,6 +188,10 @@ class GameState {
                         {
                             let player2Hit = player2Hit + 1;
                             do input.hit();
+                            if(player2Hit = 2) //stop the game if the player gets hit twice
+                            {
+                               let  roundOver = true;
+                            }
                         }
                     }
                     else //check player 1
@@ -189,6 +201,10 @@ class GameState {
                         {
                             let player1Hit = player1Hit + 1;
                             do input.hit();
+                            if(player1Hit = 2) //stop the game if the player gets hit twice
+                            {
+                                lroundOver = true;
+                            }
                         }
                     }
                 }
