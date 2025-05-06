@@ -68,9 +68,10 @@ class GameState {
                         do currentBall.clearBall();
                         do update(currentBall); 
                     }
-                    else
+                    else //animate to the ball and explode it
                     {
                         do currentBall.animateToNewBall();
+                        do currentBall.explodeBall();
                     }
                 }
                 do draw(); 

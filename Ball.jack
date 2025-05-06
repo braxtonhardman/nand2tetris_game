@@ -133,7 +133,68 @@ class Ball
 
     method void explodeBall() //this method is called to make the ball explode if the player is hit
     {
+        //create the variables needed
+        var int i, size, drawX, drawY, drawY, work, rectX, rectY;
 
+        //first we're gonna expand the ball like a bomb 3 times before it explodes
+        let i = 0;
+        while(i < 3) {
+
+            //calculate size and draw it on the screen
+            let size = ballR + i * 3;
+            do Screen.setColor(true);
+            do Screen.drawCircle(x, y, size);
+
+            //make the processor do work
+            let work = 0;
+            while(work < 5000) {
+                let work = work + 1;
+            }
+
+            //erase the ball and then increment
+            do Screen.setColor(false);
+            do Screen.drawCircle(x, y, size);
+            let i = i + 1;
+        }
+
+        //Ok now we're gonna make the ball explode into multiple different pieces (like rectangles)
+        let i = 0;
+        while(i < 4) { //this time we loop over 4 times to help crete the explosion effect
+
+            //calculate the rectangles (exploded shrapnel)
+            if(i = 0) { //shoot them up
+                let rectX = x;
+                let rectY = y - 10;
+            }
+            if(i = 1) { //shoot them down
+                let rectX = x;
+                let rectY = y + 10;
+            }
+            if(i = 2) { //shoot them left
+                let rectX = x - 10;
+                let rectY = y;
+            }
+            if(i = 3) { //shoot them right
+                let rectX = x + 10;
+                let rectY = y;
+            }
+
+            //Draw the rectangles
+            do Screen.setColor(true);
+            do Screen.drawRectangle(rectX, rectY, rectX + 4, rectY + 4);
+
+            //do some work
+            let work = 0;
+            while(work < 5000) {
+                let work = work + 1;
+            }
+
+            //then erase and increment
+            do Screen.setColor(false);
+            do Screen.drawRectangle(rectX, rectY, rectX + 4, rectY + 4);
+            let i = i + 1;
+        } 
+        return;      
     }
 
     //now do the draw method for our ball
