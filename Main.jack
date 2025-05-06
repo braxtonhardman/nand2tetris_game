@@ -30,16 +30,29 @@ class Main {
         // Clear Screen before jumping into loop
         do Screen.clearScreen();
 
-        // create two players 
+        //initalize the values for the first Room (p2 hit = 17, 60 p1 hit = 15, 50)
         let player1 = Player.new(true, pns.getPlayerName(1));
         let player2 = Player.new(false, pns.getPlayerName(2));
-
-        //initalize the values for the first Room
         let room = RoomLayout.new(player1, player2);
         do room.addWall(250,128,128,50);
         do room.setPlayerInfo(60,225,7300,380,225,7320);
         do room.run();
         do room.dispose();
+        do Memory.deAlloc(player1);
+        do Memory.deAlloc(player2);
+        do Memory.deAlloc(room);
+
+        //initalize the values for the second room (p2 hit = 20,50 p1 hit = 16, 80)
+        let player1 = Player.new(true, pns.getPlayerName(1));
+        let player2 = Player.new(false, pns.getPlayerName(2));
+        let room = RoomLayout.new(player1, player2);
+        do room.setPlayerInfo(110,225,7303,385,50,1752);
+        do room.addWall(200,120,135,100);
+        do room.addWall(385,80,20,125);
+        do room.addWall(110,40,40,20);
+        do room.run();
+        do room.dispose();
+        do Memory.deAlloc(room);
 
         return; 
     }

@@ -43,7 +43,7 @@ class Player {
 
         //Draw the hitbox
         do Screen.setColor(true);
-       // do Screen.drawRectangle(x, y, x + width, y + height);
+        do Screen.drawRectangle(x, y, x + width, y + height);
         //do Screen.setColor(false);
         if(facingRight) //draw the player facing right or left
         {
