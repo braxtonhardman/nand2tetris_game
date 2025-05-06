@@ -262,6 +262,22 @@ class Input {
         return errorMsg; 
     }
 
+    //Create the HIT message
+    method String hit() {
+        //create and initalize da string
+        var String hitMsg;
+        let hitMsg = String.new(4);  // "HIT!" is 4 characters
+
+        //add characters and return
+        do hitMsg.appendChar(72);   // 'H'
+        do hitMsg.appendChar(73);   // 'I'
+        do hitMsg.appendChar(84);   // 'T'
+        do hitMsg.appendChar(33);   // '!'
+
+        return hitMsg;
+    }
+    
+
     // Get the powerX as an Int 
     method int getPowerX() { 
         return powerXInt;

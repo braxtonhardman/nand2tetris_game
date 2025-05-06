@@ -179,6 +179,7 @@ class GameState {
                         if(colliding) //increment hit count if player is hit
                         {
                             let player2Hit = player2Hit + 1;
+                            do input.hit();
                         }
                     }
                     else //check player 1
@@ -187,6 +188,7 @@ class GameState {
                         if(colliding) //same thing here
                         {
                             let player1Hit = player1Hit + 1;
+                            do input.hit();
                         }
                     }
                 }
