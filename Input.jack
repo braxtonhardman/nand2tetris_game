@@ -53,7 +53,7 @@ class Input {
                 let temp = powerX.intValue(); 
 
                 // Check to see if the power is between 0 and 100 
-                if((temp > 0) & (temp < 100)) { 
+                if((temp > 0) & (temp < 50)) { 
                     // store powerx int 
                     let powerXInt = temp; 
                     let running = false; 
@@ -205,7 +205,7 @@ class Input {
 
     method String createPowerXPrompt() { 
         var String powerPrompt; 
-        let powerPrompt = String.new(26);
+        let powerPrompt = String.new(25);
         do powerPrompt.appendChar(69);   // 'E'
         do powerPrompt.appendChar(110);  // 'n'
         do powerPrompt.appendChar(116);  // 't'
@@ -225,8 +225,7 @@ class Input {
         do powerPrompt.appendChar(116);  // 't'
         do powerPrompt.appendChar(111);  // 'o'
         do powerPrompt.appendChar(32);   // ' '
-        do powerPrompt.appendChar(49);   // '1'
-        do powerPrompt.appendChar(48);   // '0'
+        do powerPrompt.appendChar(53);   // '5'
         do powerPrompt.appendChar(48);   // '0'
         do powerPrompt.appendChar(41);   // ')'
         do powerPrompt.appendChar(58);   // ':'
