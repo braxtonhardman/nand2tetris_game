@@ -4,7 +4,7 @@ class GameState {
     field Player player2; 
     field Ball currentBall;
     field Input input; 
-    field int turn, powerX, powerY; 
+    field int turn, powerX, powerY, player1Hit, player2Hit; 
     field RoomLayout room;
     field boolean colliding; //for checking the collision 
 
@@ -15,6 +15,8 @@ class GameState {
         let turn = 0; 
         let currentBall = null;
         let input = Input.new(player1.getName(), player2.getName());
+        let player1Hit = 0;
+        let player2Hit = 0;
         return this;
     }
 
@@ -167,7 +169,26 @@ class GameState {
                 let drawY = prevY + Math.divide(Math.multiply(dy, i), steps);
 
                 //Now check the collisions
-                let colliding = room.collideCheck(drawX, drawY, currentBall.getBallR());
+                let colliding = room.collideCheck(drawX, drawY, currentBall.getBallR()); //collision with the room
+                if(~colliding) //ball didn't collide with the room now check the player
+                {
+                    if(turn = 0) //check player 2
+                    {
+                        let colliding = player2.collideCheck(drawX, drawY, currentBall.getBallR());
+                        if(colliding) //increment hit count if player is hit
+                        {
+                            let player2Hit = player2Hit + 1;
+                        }
+                    }
+                    else //check player 1
+                    {
+                        let colliding = player1.collideCheck(drawX, drawY, currentBall.getBallR());
+                        if(colliding) //same thing here
+                        {
+                            let player1Hit = player1Hit + 1;
+                        }
+                    }
+                }
                 if(colliding) //adjust the x values if we collide and then animate to X
                 {
                     //do currentBall.clearBall();
@@ -180,12 +201,6 @@ class GameState {
                 let i = i + 1;
             }
         }
-
-        /*if(~colliding)
-        {
-            let colliding = curPlayer.collideCheck();
-        }*/
-
         return;
     }
 }

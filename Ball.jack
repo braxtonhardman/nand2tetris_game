@@ -131,6 +131,11 @@ class Ball
         return;
     }
 
+    method void explodeBall() //this method is called to make the ball explode if the player is hit
+    {
+
+    }
+
     //now do the draw method for our ball
     method void draw()
     {
