@@ -25,7 +25,9 @@ class GameState {
         var Player curPlayer;
         var int x, y; 
         let running = true; 
-        let colliding = false; 
+       // let colliding = false; 
+        // do Output.printInt(colliding);
+
 
         //draw room before player input
         do room.draw();
@@ -38,6 +40,7 @@ class GameState {
             let curPlayer = getCurrentPlayer(); 
             let x = curPlayer.getX(); 
             let y = curPlayer.getY(); 
+            let colliding = false;
 
             //grab user input
             do input.runTurn(curPlayer.getName()); 
@@ -62,6 +65,10 @@ class GameState {
                     {
                         do currentBall.clearBall();
                         do update(currentBall); 
+                    }
+                    else
+                    {
+                        do currentBall.animateToNewBall();
                     }
                 }
                 do draw(); 
@@ -115,7 +122,7 @@ class GameState {
     {
         //Draw each of our objects by calling their draw function
         do room.draw(); 
-        do currentBall.draw();
+        //do currentBall.draw();
         do player1.draw();
         do player2.draw();
         return;
@@ -163,9 +170,12 @@ class GameState {
                 let colliding = room.collideCheck(drawX, drawY, currentBall.getBallR());
                 if(colliding) //adjust the x values if we collide and then animate to X
                 {
+                    //do currentBall.clearBall();
                     do currentBall.setX(drawX);
                     do currentBall.setY(drawY);
-                    do currentBall.animateToNewBall();
+                    do currentBall.setVX(0);
+                    do currentBall.setVY(0);
+                    //do currentBall.animateToNewBall();
                 }
                 let i = i + 1;
             }

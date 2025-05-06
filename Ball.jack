@@ -157,6 +157,16 @@ class Ball
         let y = yIn;
         return;
     }
+    method void setVX(int vxIn)
+    {
+        let vx = vxIn;
+        return;
+    }
+    method void setVY(int vyIn)
+    {
+        let vy = vyIn;
+        return;
+    }
     method int getX()
     {
         return x;
