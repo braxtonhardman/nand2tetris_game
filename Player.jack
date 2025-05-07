@@ -38,7 +38,7 @@ class Player {
 
     //draw the players
     method void draw() {
-        //initalize some varaibles
+        //initalize some variables
         var int temp; 
 
         //Draw the hitbox
@@ -132,7 +132,8 @@ class Player {
         return;
     }
 
-    method boolean collideCheck(int ballX, int ballY, int ballR) //check if the ball collides with the player (similar setup to wall collission)
+    //check if the ball collides with the player (similar setup to wall collission)
+    method boolean collideCheck(int ballX, int ballY, int ballR)
     {
         var boolean toReturn; //return var
         var int ballLeft, ballRight, ballTop, ballBottom; //4 points our of our ball
@@ -146,7 +147,7 @@ class Player {
         let ballBottom = ballY + ballR;
 
         //Now do the same things for our wall
-        let wallLeft = x; //yes I know I'm reusing variables here but the naming convention helps me revisualie how to check the collision bounds
+        let wallLeft = x; //yes I know I'm reusing variables here but the naming convention helps me revisualize how to check the collision bounds
         let wallRight = x + width;
         let wallTop = y; //same thing here
         let wallBottom = y + height;

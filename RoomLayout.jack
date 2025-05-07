@@ -14,14 +14,14 @@ class RoomLayout {
         //initalize some values
         let p1 = player1;
         let p2 = player2;
-        let wallArray = Array.new(10); //10 references for MAx 10 walls
+        let wallArray = Array.new(10); //10 references for Max 10 walls
         let currentWallCount = 0; 
         let p1Score = 0;
         let p2Score = 0;
         return this;
     }
 
-    // Draw all the wallls in the class 
+    // Draw all the walls in the class 
     method void draw() {
         
         //loop through the Array and draw each wall

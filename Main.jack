@@ -1,7 +1,7 @@
 // Main game is simlar to the di
 class Main { 
 
-    //Create some field varaibles needed for initial room setup and for the methods
+    //Create some field variables needed for initial room setup and for the methods
     static RoomLayout room;
     static Player player1, player2; 
     static int currentRoom;
@@ -32,7 +32,7 @@ class Main {
         // Clear Screen before jumping into loop
         do Screen.clearScreen();
 
-        //initalize the values for the first Room (p2 hit = 17, 60 p1 hit = 15, 50)
+        //initalize the values for the first Room (p2 hit = 17, 60 | p1 hit = 15, 50)
         let player1 = Player.new(true, pns.getPlayerName(1));
         let player2 = Player.new(false, pns.getPlayerName(2));
         let room = RoomLayout.new(player1, player2);
@@ -46,7 +46,7 @@ class Main {
         do Memory.deAlloc(player2);
         do Memory.deAlloc(room);
 
-        //initalize the values for the second room (p2 hit = 20,50 p1 hit = 16, 80)
+        //initalize the values for the second room (p2 hit = 20,50 | p1 hit = 16, 80)
         let player1 = Player.new(true, pns.getPlayerName(1));
         let player2 = Player.new(false, pns.getPlayerName(2));
         let room = RoomLayout.new(player1, player2);
@@ -60,7 +60,7 @@ class Main {
         do room.dispose();
         do Memory.deAlloc(room);
 
-        //Start and do the third room (p2 hit = 25, 25 p1 hit = 30, 50)
+        //Start and do the third room (p2 hit = 25, 25 | p1 hit = 30, 50)
         let player1 = Player.new(true, pns.getPlayerName(1));
         let player2 = Player.new(false, pns.getPlayerName(2));
         let room = RoomLayout.new(player1, player2);

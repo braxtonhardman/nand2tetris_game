@@ -21,6 +21,14 @@ class PlayerNameScreen {
         // Reset the cursor positon 
         do Output.moveCursor(0, 0);
         // Ask for player 1 input name 
+
+        // Line spaces
+        do Output.println();
+        do Output.println();
+        do Output.println();
+        do Output.println();
+        do Output.println();
+        do Output.println();
         do Output.printString(makeNamePrompt(49));
         // Listen for keyboard input here using readChar 
         while(running) { 
@@ -65,7 +73,18 @@ class PlayerNameScreen {
         var String s;
 
         // Total length = 22 characters
-        let s = String.new(25);
+        let s = String.new(34);
+
+        // Leading spaces
+        do s.appendChar(32);
+        do s.appendChar(32);
+        do s.appendChar(32);
+        do s.appendChar(32);
+        do s.appendChar(32);
+        do s.appendChar(32);
+        do s.appendChar(32);
+        do s.appendChar(32);
+        do s.appendChar(32);
 
         // Append each character in "Enter player 1's name"
         do s.appendChar(69);   // 'E'
@@ -81,6 +100,7 @@ class PlayerNameScreen {
         do s.appendChar(101);  // 'e'
         do s.appendChar(114);  // 'r'
         do s.appendChar(32);   // ' '
+
         // playerNum will either be 49: 1 or 50: 2 
         do s.appendChar(playerNum);   // '1' or '2'
         do s.appendChar(39);   // '''
@@ -96,9 +116,9 @@ class PlayerNameScreen {
         return s;
     }
 
-    //this method prints our our winner of the game
+    // This method prints our our winner of the game
     method void printWinner(String player1Name, int p1Score, String player2Name, int p2Score) {
-        //Set up the variables needed
+        //set up the variables needed
         var String msg;
         var int scoreDif; //used to keep track of how many more points one player had over the other
         do Screen.clearScreen(); //some clean up prints
@@ -146,7 +166,7 @@ class PlayerNameScreen {
         do Output.printString(msg);
         do Memory.deAlloc(msg);
 
-        //print if either player 1 or player2 has won the game
+        //print if either player1 or player2 has won the game
         if(p1Score > p2Score) //p1 wins
         {
             do Output.printString(player1Name);
@@ -182,7 +202,7 @@ class PlayerNameScreen {
         do msg.appendChar(32);  // ' '
         do Output.printString(msg);
         do Memory.deAlloc(msg);
-        do Output.printInt(scoreDif); //diference in scores
+        do Output.printInt(scoreDif); //difference in scores
         let msg = String.new(16);
         do msg.appendChar(32);  // ' '
         do msg.appendChar(109); // 'm'
@@ -203,7 +223,7 @@ class PlayerNameScreen {
         do Output.printString(msg);
         do Memory.deAlloc(msg);
 
-        //print out the looser
+        //print out the winner
         if(p2Score > p1Score) //p2 wins
         {
             do Output.printString(player1Name);

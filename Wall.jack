@@ -13,7 +13,6 @@ class Wall
         let y = yStart;
         let wallLength = startLength;
         let wallWidth = startWidth;
-       // let address = startAddress;
 
         return this;
     }
@@ -44,7 +43,7 @@ class Wall
         let ballBottom = ballY + ballR;
 
         //Now do the same things for our wall
-        let wallLeft = x; //yes I know I'm reusing variables here but the naming convention helps me revisualie how to check the collision bounds
+        let wallLeft = x; //yes I know I'm reusing variables here but the naming convention helps me revisualize how to check the collision bounds
         let wallRight = x + wallWidth;
         let wallTop = y; //same thing here
         let wallBottom = y + wallLength;
@@ -78,7 +77,7 @@ class Wall
 
 
 
-    //Create some accessors and mutators for the wallvalues for debugging and what not
+    //Create some accessors and mutators for the wall values for debugging and what not
     method int getX(){return x;}
     method int getY(){return y;}
     method int getLength(){return wallLength;}

@@ -17,7 +17,17 @@ class StartScreen {
         return; 
     }
 
+    //prints title strings
     function void printStartMessage() { 
+        do Output.println();
+        do Output.println();
+        do Output.println();
+        do Output.println();
+        do Output.println();
+        do Output.println();
+        do Output.println();
+        do Output.println();
+        do Output.printString(StartScreen.makeTitle());
         do Output.println();
         do Output.println();
         do Output.println();
@@ -27,13 +37,67 @@ class StartScreen {
         return;
     }
 
-    
+    //game name string
+    function String makeTitle() {
+        var String s;
+        let s = String.new(38); 
+
+        // Add 18 leading spaces
+        do s.appendChar(32);
+        do s.appendChar(32);
+        do s.appendChar(32);
+        do s.appendChar(32);
+        do s.appendChar(32);
+        do s.appendChar(32);
+        do s.appendChar(32);
+        do s.appendChar(32);
+        do s.appendChar(32);
+        do s.appendChar(32);
+        do s.appendChar(32);
+        do s.appendChar(32);
+        do s.appendChar(32);
+        do s.appendChar(32);
+        do s.appendChar(32);
+        do s.appendChar(32);
+        do s.appendChar(32);
+        do s.appendChar(32);
+        do s.appendChar(32);
+        do s.appendChar(32);
+        do s.appendChar(32);
+        do s.appendChar(32);
+        do s.appendChar(32);
+        do s.appendChar(32);
+        do s.appendChar(32);
+        do s.appendChar(32);
+
+        // Append message: "Bombmasters"
+        do s.appendChar(66);  // 'b'
+        do s.appendChar(79); // 'o'
+        do s.appendChar(77); // 'm'
+        do s.appendChar(66);  // 'b'
+        do s.appendChar(77); // 'm'
+        do s.appendChar(65);  // 'a'
+        do s.appendChar(83); // 's'
+        do s.appendChar(84); // 't'
+        do s.appendChar(69); // 'e'
+        do s.appendChar(82); // 'r'
+        do s.appendChar(83); // 's'
+
+        return s;
+    }
+
     // Creates the continue message with spaces infront of it 
     function String makeContinueMessage() {
         var String s;
-        let s = String.new(37); 
+        let s = String.new(43); 
 
         // Add 12 leading spaces
+        do s.appendChar(32);
+        do s.appendChar(32);
+        do s.appendChar(32);
+        do s.appendChar(32);
+        do s.appendChar(32);
+        do s.appendChar(32);
         do s.appendChar(32);
         do s.appendChar(32);
         do s.appendChar(32);

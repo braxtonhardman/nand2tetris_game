@@ -31,7 +31,7 @@ class Input {
         return this;
     }
 
-    // Prompts and gets the power x 
+    // Prompts and gets the power X
     method boolean powerXInput() { 
         var boolean running; 
         var int temp; 
@@ -42,7 +42,7 @@ class Input {
         // Move down 1 line 
         do Output.println();
 
-        // Print the powerx prompt 
+        // Print the powerX prompt 
         do Output.printString(createPowerXPrompt()); 
 
         // First input for the angle 
@@ -55,7 +55,7 @@ class Input {
 
                 // Check to see if the power is between 0 and 100 
                 if((temp > 0) & (temp < 50)) { 
-                    // store powerx int 
+                    // store powerX int 
                     let powerXInt = temp; 
                     let running = false; 
                     return true; 
@@ -75,7 +75,7 @@ class Input {
                 }
             } else { 
                 
-                // if a key is pressed append it to powerx 
+                // if a key is pressed append it to powerX
                 if( ~(key = 0))  { 
                     do powerX.appendChar(key);
                 }
@@ -84,7 +84,7 @@ class Input {
         return false;
     }
 
-    // Prompt and get the power y input
+    // Prompt and get the powerY input
     method boolean powerYInput() {
         var boolean running; 
         var int temp; 
@@ -95,7 +95,7 @@ class Input {
         // Move down one line 
         do Output.println(); 
 
-        // Print out the power prompt
+        // Print out the powerY prompt
         do Output.printString(createPowerYPrompt());
 
         while(running) { 
@@ -140,7 +140,7 @@ class Input {
     }
 
 
-    // Gets the input powerx and powery for how hard to throw the bomb 
+    // Gets the input powerX and powerY for how hard to throw the bomb 
     method void runTurn(String currentPlayer) { 
         var boolean valid; 
         var int temp; 
@@ -179,6 +179,7 @@ class Input {
     method String createPowerYPrompt() { 
         var String powerPrompt; 
         let powerPrompt = String.new(26);
+
         do powerPrompt.appendChar(69);   // 'E'
         do powerPrompt.appendChar(110);  // 'n'
         do powerPrompt.appendChar(116);  // 't'
@@ -204,6 +205,7 @@ class Input {
         do powerPrompt.appendChar(41);   // ')'
         do powerPrompt.appendChar(58);   // ':'
         do powerPrompt.appendChar(32);   // ' '
+
         return powerPrompt; 
     }
 
@@ -310,7 +312,7 @@ class Input {
 
         do Output.printString(msg);
         do Output.println();
-        do msg.dispose(); //release our memory
+        do msg.dispose(); //releases our memory
         do pressAnyKey();
         return;   
     }
