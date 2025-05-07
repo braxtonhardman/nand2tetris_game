@@ -52,7 +52,7 @@ class Main {
         let room = RoomLayout.new(player1, player2);
         do room.setPlayerInfo(110,225,7303,385,50,1752);
         do room.addWall(200,120,135,100);
-        do room.addWall(385,80,20,125);
+        do room.addWall(385,80,20,110);
         do room.addWall(110,40,40,20);
         do room.run();
         let p1Score = p1Score + room.getP1Score();
