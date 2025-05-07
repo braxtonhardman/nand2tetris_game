@@ -4,6 +4,7 @@ class Input {
     field String powerX, powerY; 
     field int powerXInt, powerYInt; 
 
+    // Constructor copies the player names 
     constructor Input new(String p1name, String p2name) { 
         var int i;
         var char c; 
@@ -138,6 +139,8 @@ class Input {
         return false; 
     }
 
+
+    // Gets the input powerx and powery for how hard to throw the bomb 
     method void runTurn(String currentPlayer) { 
         var boolean valid; 
         var int temp; 
@@ -172,6 +175,7 @@ class Input {
         return; 
     }
 
+    // Creates the string enter powerY (0 to 100)
     method String createPowerYPrompt() { 
         var String powerPrompt; 
         let powerPrompt = String.new(26);
@@ -203,6 +207,7 @@ class Input {
         return powerPrompt; 
     }
 
+    // Creates the string enter powerX (0 to 50)
     method String createPowerXPrompt() { 
         var String powerPrompt; 
         let powerPrompt = String.new(25);
@@ -233,10 +238,11 @@ class Input {
         return powerPrompt; 
     }
 
+    // Creates string Error: Invalid input 
     method String createInvalidInput() { 
         var String errorMsg;
 
-        let errorMsg = String.new(25);       // "Error: Invalid input" is 20 characters
+        let errorMsg = String.new(25);       
 
         do errorMsg.appendChar(69);          // 'E'
         do errorMsg.appendChar(114);         // 'r'

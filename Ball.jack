@@ -254,42 +254,60 @@ class Ball
         let x = xIn;
         return;
     }
+
+    // Set the y position 
     method void setY(int yIn)
     {
         let y = yIn;
         return;
     }
+
+    // Set velocity X 
     method void setVX(int vxIn)
     {
         let vx = vxIn;
         return;
     }
+
+    // Set velocity y 
     method void setVY(int vyIn)
     {
         let vy = vyIn;
         return;
     }
+
+    // Get x position 
     method int getX()
     {
         return x;
     }
+
+    // Get y positon
     method int getY()
     {
         return y;
     }
+
+    // Get velocity x 
     method int getVX()
     {
         return vx;
     }
+
+    // Get velocity y 
     method int getVY()
     {
         return vy;
     }
-    method boolean getBallStop() //get whether or not the ball is stopped
+
+    //get whether or not the ball is stopped
+    method boolean getBallStop() 
     {
         return ballStop;
     }
-    method int getBallR() //grab the radius of the ball
+
+    // grab the radius of the ball
+    method int getBallR()
     {
         return ballR;
     }

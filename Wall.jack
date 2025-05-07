@@ -21,23 +21,6 @@ class Wall
     //draw method
     method void draw()
     {
-       /* //Make some variables needed for the draw calculations to keep track of the current row, column and address
-        var int currentRow, currrentColumn, baseAddress, currentAddress;
-
-        //we're gonna dynamically calculate the specific registers to color in and loop over via nested while
-        let currentRow = 0;
-        while (currentRow < wallLength) 
-        {
-            let currrentColumn = 0;
-            while (currrentColumn < wallWidth) //inner loop to draw on each column in the row
-            {
-                let baseAddress = 16384 + ((y + currentRow) * 32); //this is our base address where our row starts
-                let currentAddress = baseAddress + x + currrentColumn; //this is the offset for each column
-                do Memory.poke(currentAddress, -1);
-                let currrentColumn = currrentColumn + 1;
-            }
-            let currentRow = currentRow + 1;
-        }*/
 
         do Screen.setColor(true);
         do Screen.drawRectangle(x,y,(x+wallWidth), y+(wallLength));

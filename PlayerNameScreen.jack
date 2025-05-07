@@ -216,7 +216,7 @@ class PlayerNameScreen {
         return;
     }
 
-
+    // Get player name 
     method String getPlayerName(int playerNum) { 
         if(playerNum = 1) { 
             return playerOneName;

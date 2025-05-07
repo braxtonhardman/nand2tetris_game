@@ -59,6 +59,7 @@ class Player {
         return;
     }
 
+    // Bitmap for right facing player
     method void drawFacingRight() { 
         // column 0
         do Memory.poke(memAddress, 8188);
@@ -92,6 +93,7 @@ class Player {
         return; 
     }
 
+    // Bitmap for a left facing player
     method void drawFacingLeft() { 
         // column 0
         do Memory.poke(memAddress, -128);

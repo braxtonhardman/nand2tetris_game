@@ -9,6 +9,7 @@ class GameState {
     field boolean colliding; //for checking the collision 
     field boolean roundOver; //variable that holds if the game is over
 
+    // Game state constructor 
     constructor GameState new(Player p1, Player p2, RoomLayout r) { 
         let player1 = p1;
         let player2 = p2; 
@@ -26,8 +27,6 @@ class GameState {
         //some variables needed for runing the room
         var Player curPlayer;
         var int x, y; 
-       // let colliding = false; 
-        // do Output.printInt(colliding);
 
 
         //draw room before player input
@@ -36,6 +35,7 @@ class GameState {
         do player2.draw();
          
         
+        // While round is not over rujn the game loop 
         while(~roundOver) { 
             //set some values
             let curPlayer = getCurrentPlayer(); 
@@ -91,6 +91,7 @@ class GameState {
         return; 
     }
 
+    // Switch turns between players 
     method void switchTurn() { 
         if(turn = 0) { 
             let turn = 1; 
@@ -106,6 +107,7 @@ class GameState {
         return; 
     }
 
+    // Get player 
     method Player getPlayer(int playerNum) { 
         if(playerNum = 1) { 
             return player1;
@@ -114,6 +116,7 @@ class GameState {
         }
     }
 
+    // Get the current player baed on the turns 
     method Player getCurrentPlayer() { 
         if(turn = 0) { 
             return player1;
@@ -121,6 +124,8 @@ class GameState {
             return player2; 
         }
     }
+
+    // Get the current players name 
     method String getCurrentPlayerName() { 
         if(turn = 0) { 
             return player1.getName(); 
@@ -129,6 +134,7 @@ class GameState {
         }
     }
 
+    // Draw method to draw the room and players 
     method void draw()
     {
         //Draw each of our objects by calling their draw function

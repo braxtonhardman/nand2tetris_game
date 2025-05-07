@@ -5,6 +5,7 @@ class StartScreen {
         return this;
     }
 
+    // When doing getKey keyboard calls readChar which halts running the rest of the code tell a key is pressed 
     function void getKey() { 
         var int key; 
         let key = Keyboard.readChar(); 
@@ -27,10 +28,10 @@ class StartScreen {
     }
 
     
-
+    // Creates the continue message with spaces infront of it 
     function String makeContinueMessage() {
         var String s;
-        let s = String.new(37); // 12 spaces + 25 characters
+        let s = String.new(37); 
 
         // Add 12 leading spaces
         do s.appendChar(32);
