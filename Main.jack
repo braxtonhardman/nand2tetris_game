@@ -19,7 +19,6 @@ class Main {
 
         // Print starting message screen 
         do StartScreen.printStartMessage(); 
-        do Output.printInt(0);
 
         // Wait for any key to be pressed before continuing execution 
         do StartScreen.getKey(); 
@@ -29,7 +28,6 @@ class Main {
 
         // Start input for player names stored in class 
         do pns.printPlayerMessage();
-        do Output.printInt(1);
         
         // Clear Screen before jumping into loop
         do Screen.clearScreen();
