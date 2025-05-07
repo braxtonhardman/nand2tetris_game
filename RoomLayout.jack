@@ -6,6 +6,7 @@ class RoomLayout {
     field Array wallArray; 
     field int currentWallCount; //used for how many walls we currently have
     field Player p1, p2; //players
+    field int p1Score, p2Score;
 
     // Pass in your wall layouts 
     constructor RoomLayout new(Player player1, Player player2)  {
@@ -15,6 +16,8 @@ class RoomLayout {
         let p2 = player2;
         let wallArray = Array.new(10); //10 references for MAx 10 walls
         let currentWallCount = 0; 
+        let p1Score = 0;
+        let p2Score = 0;
         return this;
     }
 
@@ -42,6 +45,8 @@ class RoomLayout {
         var GameState gameState;
         let gameState = GameState.new(p1,p2,this);
         do gameState.run();
+        let p1Score = gameState.getP1Score();
+        let p2Score = gameState.getP2Score();
         do Memory.deAlloc(gameState);
         return;
     }
@@ -91,4 +96,15 @@ class RoomLayout {
         do p2.setMemAddress(p2Mem);
         return;
     }
+
+    //methods to relay the scores
+    method int getP1Score()
+    {
+        return p1Score;
+    }
+    method int getP2Score()
+    {
+        return p2Score;
+    }
+
 }

@@ -5,18 +5,21 @@ class Main {
     static RoomLayout room;
     static Player player1, player2; 
     static int currentRoom;
-
-    //Create a constructor for Main
+    static int p1Score, p2Score; //for keeping the player scores at the end of the game
 
     // Intialization function 
     function void main() { 
         // Exactly like the name says gets the player names 
         var PlayerNameScreen pns; 
-
         let pns = PlayerNameScreen.new();
+
+        //Initialize the player scores
+        let p1Score = 0;
+        let p2Score = 0;
 
         // Print starting message screen 
         do StartScreen.printStartMessage(); 
+        do Output.printInt(0);
 
         // Wait for any key to be pressed before continuing execution 
         do StartScreen.getKey(); 
@@ -26,6 +29,7 @@ class Main {
 
         // Start input for player names stored in class 
         do pns.printPlayerMessage();
+        do Output.printInt(1);
         
         // Clear Screen before jumping into loop
         do Screen.clearScreen();
@@ -37,6 +41,8 @@ class Main {
         do room.addWall(250,128,128,50);
         do room.setPlayerInfo(60,225,7300,380,225,7320);
         do room.run();
+        let p1Score = p1Score + room.getP1Score();
+        let p2Score = p2Score + room.getP2Score();
         do room.dispose();
         do Memory.deAlloc(player1);
         do Memory.deAlloc(player2);
@@ -51,27 +57,30 @@ class Main {
         do room.addWall(385,80,20,125);
         do room.addWall(110,40,40,20);
         do room.run();
+        let p1Score = p1Score + room.getP1Score();
+        let p2Score = p2Score + room.getP2Score();
         do room.dispose();
         do Memory.deAlloc(room);
 
-        return; 
-    }
+        //Start and do the third room (p2 hit = 25, 25 p1 hit = 30, 50)
+        let player1 = Player.new(true, pns.getPlayerName(1));
+        let player2 = Player.new(false, pns.getPlayerName(2));
+        let room = RoomLayout.new(player1, player2);
+        do room.setPlayerInfo(29,67,2178,450,200,6460);
+        do room.addWall(200,50,130,60);
+        do room.addWall(10,100,8,50);
+        do room.addWall(450,230,8,55);
+        do room.addWall(450,100,55,8);
+        do room.run();
+        let p1Score = p1Score + room.getP1Score();
+        let p2Score = p2Score + room.getP2Score();
+        do room.dispose();
+        do Memory.deAlloc(player1);
+        do Memory.deAlloc(player2);
+        do Memory.deAlloc(room);
 
-    method void changeRoom() //chnage to the next room
-    {
-        /*if(currentRoom = 1) //change to room #2
-        {
-            do Memory.deAlloc(room1);
-            let currentRoom = 2;        
-        }
-        if(currentRoom = 2) //change to room #3
-        {
-            //Room change logic 
-        }
-        else
-        {
-            //Room 3 change logic (maybe potential winn game logic here)
-        }*/
-        return;
+        //Add up the player scores and then print the winning screen
+        do pns.printWinner(pns.getPlayerName(1), p1Score, pns.getPlayerName(2), p2Score);
+        return; 
     }
 }

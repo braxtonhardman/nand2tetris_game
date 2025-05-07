@@ -238,4 +238,14 @@ class GameState {
         do Screen.clearScreen(); //prep to go to the next room or end screen
         return;
     }
+
+    //method to get the score of p1
+    method int getP1Score()
+    {
+        return player2Hit;
+    }
+    method int getP2Score() //get the player 2 score
+    {
+        return player1Hit;
+    }
 }
