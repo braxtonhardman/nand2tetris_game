@@ -1,0 +1,251 @@
+class GameState { 
+
+    field Player player1; 
+    field Player player2; 
+    field Ball currentBall;
+    field Input input; 
+    field int turn, powerX, powerY, player1Hit, player2Hit; 
+    field RoomLayout room;
+    field boolean colliding; //for checking the collision 
+    field boolean roundOver; //variable that holds if the game is over
+
+    constructor GameState new(Player p1, Player p2, RoomLayout r) { 
+        let player1 = p1;
+        let player2 = p2; 
+        let room = r; 
+        let turn = 0; 
+        let currentBall = null;
+        let input = Input.new(player1.getName(), player2.getName());
+        let player1Hit = 0;
+        let player2Hit = 0;
+        let roundOver = false;
+        return this;
+    }
+
+    method void run() { 
+        //some variables needed for runing the room
+        var Player curPlayer;
+        var int x, y; 
+       // let colliding = false; 
+        // do Output.printInt(colliding);
+
+
+        //draw room before player input
+        do room.draw();
+        do player1.draw();
+        do player2.draw();
+         
+        
+        while(~roundOver) { 
+            //set some values
+            let curPlayer = getCurrentPlayer(); 
+            let x = curPlayer.getX(); 
+            let y = curPlayer.getY(); 
+            let colliding = false;
+
+            //grab user input
+            do input.runTurn(curPlayer.getName()); 
+            let powerX = input.getPowerX();
+            let powerY = input.getPowerY(); 
+            
+            
+             // x, y, xpow, ypow
+            let currentBall = Ball.new(x, y, powerX, powerY, curPlayer.getFacingRight()); 
+
+            //Draw everything before the loop starts 
+            do Screen.clearScreen();
+            do draw();
+
+            while(~(colliding) & ~(currentBall.getBallStop())) { 
+
+                //draw update and clear the balls
+                if(~currentBall.getBallStop()) //only draw the ball if it isn't stopped
+                {
+                    do checkCollision(); //check the next place the ball is going to go
+                    if(~colliding) //update the ball if it doesn't collide
+                    {
+                        do currentBall.clearBall();
+                        do update(currentBall); 
+                    }
+                    else //animate to the ball and explode it
+                    {
+                        do currentBall.animateToNewBall();
+                        do currentBall.explodeBall();
+                    }
+                }
+                do draw(); 
+            }
+
+            //check and see if the roundisOver and if not then switch the turn
+            if(roundOver)
+            {
+                do printWinner();
+            }
+            else //switch the turn and release the ball
+            {
+               do switchTurn();
+               do Memory.deAlloc(currentBall);  
+            }
+        }
+
+        return; 
+    }
+
+    method void switchTurn() { 
+        if(turn = 0) { 
+            let turn = 1; 
+        } else {
+            let turn = 0;
+        }
+
+        return; 
+    }
+    // Launch the ball and draw the ball 
+    method void update(Ball currentBall) {        
+        do currentBall.move(); 
+        return; 
+    }
+
+    method Player getPlayer(int playerNum) { 
+        if(playerNum = 1) { 
+            return player1;
+        } else { 
+            return player2; 
+        }
+    }
+
+    method Player getCurrentPlayer() { 
+        if(turn = 0) { 
+            return player1;
+        } else { 
+            return player2; 
+        }
+    }
+    method String getCurrentPlayerName() { 
+        if(turn = 0) { 
+            return player1.getName(); 
+        } else { 
+            return player2.getName();
+        }
+    }
+
+    method void draw()
+    {
+        //Draw each of our objects by calling their draw function
+        do room.draw(); 
+        //do currentBall.draw();
+        do player1.draw();
+        do player2.draw();
+        return;
+    }
+
+    method void checkCollision() //method that checks if the ball hit a player or a wall 
+    {
+        var int x, y, vx, vy, prevX; //these we are getting with accessors 
+        var int prevY, dx, dy, drawX, drawY, steps, i, work; //these we are initalizing and calculating
+        
+        //check collision with each entity in the room
+        if(~colliding)
+        {
+            //Now grab all the data from the ball and check the collision (this is pretty much a modified copy of the code in the Ball class (not very single resposnbility principle lol))
+            let vx = currentBall.getVX();
+            let vy = currentBall.getVY();
+            let x = currentBall.getX() + vx;
+            let y = currentBall.getY() + vy;
+            let prevX = currentBall.getX();
+            let prevY = currentBall.getY();
+
+            //Now create the other values that we are using
+            //Now update ball animation and moveemnt for smoother motion
+            let dx = x - prevX; //deltaX
+            let dy = y - prevY; //deltaY
+
+            if(Math.abs(dx) > Math.abs(dy)) //determine if there is more change in the x or y for our animation
+            {
+                let steps = Math.abs(dx);
+            }
+            else
+            {
+                let steps = Math.abs(dy);
+            }
+
+            let i = 0;
+            while((i < steps) & ~(colliding)) //loop over the number of steps to reanimate the change in that we covered
+            {
+                //guys this equation I found is called linear interploation to calculate the change. prevX = prevX + (dx * i) /steps
+                //drawX and drawY are abirtray values to track each time we draw and animate and also so that we don't override prevX and X
+                let drawX = prevX + Math.divide(Math.multiply(dx, i), steps);
+                let drawY = prevY + Math.divide(Math.multiply(dy, i), steps);
+
+                //Now check the collisions
+                let colliding = room.collideCheck(drawX, drawY, currentBall.getBallR()); //collision with the room
+                if(~colliding) //ball didn't collide with the room now check the player
+                {
+                    if(turn = 0) //check player 2
+                    {
+                        let colliding = player2.collideCheck(drawX, drawY, currentBall.getBallR());
+                        if(colliding) //increment hit count if player is hit
+                        {
+                            let player2Hit = player2Hit + 1;
+                            do input.hit();
+                            if(player2Hit = 2) //stop the game if the player gets hit twice
+                            {
+                               let  roundOver = true;
+                            }
+                        }
+                    }
+                    else //check player 1
+                    {
+                        let colliding = player1.collideCheck(drawX, drawY, currentBall.getBallR());
+                        if(colliding) //same thing here
+                        {
+                            let player1Hit = player1Hit + 1;
+                            do input.hit();
+                            if(player1Hit = 2) //stop the game if the player gets hit twice
+                            {
+                                let roundOver = true;
+                            }
+                        }
+                    }
+                }
+                if(colliding) //adjust the x values if we collide and then animate to X
+                {
+                    //do currentBall.clearBall();
+                    do currentBall.setX(drawX);
+                    do currentBall.setY(drawY);
+                    do currentBall.setVX(0);
+                    do currentBall.setVY(0);
+                    //do currentBall.animateToNewBall();
+                }
+                let i = i + 1;
+            }
+        }
+        return;
+    }
+
+    method void printWinner() //this program essentially asks the input class to print the winner of the round
+    {
+        //call the input function to display the message on the screen
+        do Screen.clearScreen();
+        if(turn = 0) //player one wins
+        {
+            do input.printWinner(player1.getName());
+        }
+        else //player 2 wins
+        {
+            do input.printWinner(player2.getName());
+        }
+        do Screen.clearScreen(); //prep to go to the next room or end screen
+        return;
+    }
+
+    //method to get the score of p1
+    method int getP1Score()
+    {
+        return player2Hit;
+    }
+    method int getP2Score() //get the player 2 score
+    {
+        return player1Hit;
+    }
+}

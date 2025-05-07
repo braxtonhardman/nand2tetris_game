@@ -1,0 +1,110 @@
+//This class is what changes and holds the current room layout as well as checks collisions for the walls
+
+class RoomLayout { 
+
+    //values to be used by the class
+    field Array wallArray; 
+    field int currentWallCount; //used for how many walls we currently have
+    field Player p1, p2; //players
+    field int p1Score, p2Score;
+
+    // Pass in your wall layouts 
+    constructor RoomLayout new(Player player1, Player player2)  {
+        
+        //initalize some values
+        let p1 = player1;
+        let p2 = player2;
+        let wallArray = Array.new(10); //10 references for MAx 10 walls
+        let currentWallCount = 0; 
+        let p1Score = 0;
+        let p2Score = 0;
+        return this;
+    }
+
+    // Draw all the wallls in the class 
+    method void draw() {
+        
+        //loop through the Array and draw each wall
+        var int i;
+        var Wall tempWall;
+        let i = 0;
+
+        while(i < currentWallCount) //start the loop
+        {
+            let tempWall = wallArray[i];
+            do tempWall.draw();
+            let i = i + 1;
+        }
+        
+        return; 
+    }
+
+    method void run() //create and run the gameState
+    {
+        //Create and run the GameState
+        var GameState gameState;
+        let gameState = GameState.new(p1,p2,this);
+        do gameState.run();
+        let p1Score = gameState.getP1Score();
+        let p2Score = gameState.getP2Score();
+        do Memory.deAlloc(gameState);
+        return;
+    }
+
+    method void dispose() //clear all of our memory
+    {
+        do wallArray.dispose(); //clear the Array
+        do Memory.deAlloc(wallArray); //kill the wall Array
+        return;
+    }
+
+    //check whether or not the ball is colliding with the wall
+    method boolean collideCheck(int ballX, int ballY, int ballR)
+    {
+        //create and set the variables
+        var boolean toReturn;
+        var Wall tempWall;
+        var int i;
+        let i = 0;
+
+        //loop over every wall and check the collision
+        while((i < currentWallCount) & ~(toReturn))
+        {
+            let tempWall = wallArray[i];
+            let toReturn = tempWall.collideCheck(ballX, ballY, ballR);
+            let i = i + 1;
+        }
+
+        return toReturn;
+    }
+
+    //Add a wall to the Array
+    method void addWall(int wallX, int wallY, int wallLength, int wallWidth)
+    {
+        let wallArray[currentWallCount] = Wall.new(wallX, wallY, wallLength, wallWidth);
+        let currentWallCount = currentWallCount + 1;
+        return;
+    }
+
+    //Set player cords
+    method void setPlayerInfo(int p1X, int p1Y, int p1Mem, int p2X, int p2Y, int p2Mem)
+    {
+        //update the player's accordingly
+        do p1.setPos(p1X, p1Y);
+        do p1.setMemAddress(p1Mem);
+        do p2.setPos(p2X, p2Y);
+        do p2.setMemAddress(p2Mem);
+        return;
+    }
+
+    //methods to relay the scores
+    method int getP1Score()
+    {
+        return p1Score;
+    }
+    method int getP2Score()
+    {
+        return p2Score;
+    }
+
+}
